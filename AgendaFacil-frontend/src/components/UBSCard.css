@@ -1,28 +1,33 @@
+.ubs-card { /* conteudo dentro*/
+  display: -webkit-inline-flex;
+  flex-direction: row;
+  align-items: center; 
+  width: 500px; /* Ajuste a largura conforme necessário */
+  border-radius: 8px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  margin: 20px; /* Adicionado um espaçamento entre as caixas */
+  padding: 30px; /* Adicionado preenchimento interno */
+}
+  
+.ubs-card img {
+  border-radius: 10px 10px 10px 10px;
+  width: 40%;
+  height: 200px;
+  object-fit: cover;
+}
 
-.ubs-card {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Ajustado para alinhar à esquerda */
-    justify-content: center;
-    width: 800px; /* Ajuste a largura conforme necessário */
-    border-radius: 8px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    margin: 20px; /* Adicionado um espaçamento entre as caixas */
-    padding: 30px; /* Adicionado preenchimento interno */
-  }
-  
-  .ubs-card img {
-    border-radius: 8px 8px 0 0;
-    width: 100%;
-    height: 200px;
-  }
-  
-  .ubs-card p {
-    margin: 0; /* Removido o espaço entre os parágrafos */
-    font-size: 18px; /* tamanho da fonte padrão*/
-  }
+.ubs-card div {
+  display: flex;
+  flex-direction: column; /* Alterado para coluna para os itens ficarem na vertical */
+  margin-left: 20px; /* Adicionado espaçamento entre imagem e texto */
+}
 
-  .ubs-card strong {
-    font-size: 26px;
-  }
-  
+.ubs-card p {
+  margin: 10px; /* Removido o espaço entre os parágrafos */
+  font-size: 15px; /* tamanho da fonte padrão*/
+}
+
+.ubs-card strong {
+ 
+  font-size: 26px;
+}

@@ -10,41 +10,39 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.api.agendafacil.models.AgendaFacilModelo;
+import com.api.agendafacil.models.UBS;
 import com.api.agendafacil.repositories.RepositorioUBS;
 
 import jakarta.transaction.Transactional;
 
 @Service
-public class AgendaFacilService {
+public class UBSService {
 
-	final RepositorioUBS repositorioUBS;
-	
-	public AgendaFacilService(RepositorioUBS repositorioUBS) {
-		this.repositorioUBS = repositorioUBS;
-	}
+	@Autowired
+	private RepositorioUBS repositorioUBS;
 	
 	@Transactional
-	public AgendaFacilModelo save(AgendaFacilModelo agendaFacilModel) {
-		return repositorioUBS.save(agendaFacilModel);
+	public UBS save(UBS ubs) {
+		return repositorioUBS.save(ubs);
 	}
 
 	public boolean existsByNomeUBS(String nomeUBS) {
 		return repositorioUBS.existsByNomeUBS(nomeUBS);
 	}
 
-	public List<AgendaFacilModelo> findAll() {
+	public List<UBS> findAll() {
 		return repositorioUBS.findAll();
 	}
 
-	public Optional<AgendaFacilModelo> findById(UUID id) {
+	public Optional<UBS> findById(UUID id) {
 		return repositorioUBS.findById(id);
 	}
 
 	@Transactional
-	public void delete(AgendaFacilModelo agendaFacilModelo) {
-		repositorioUBS.delete(agendaFacilModelo);
+	public void delete(UBS ubs) {
+		repositorioUBS.delete(ubs);
 	}
 }

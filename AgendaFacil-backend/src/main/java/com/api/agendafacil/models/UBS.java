@@ -19,8 +19,7 @@ import jakarta.persistence.Table;
 
 @Entity(name = "TB_UBS")
 @Table(name = "TB_AGENDA_FACIL")
-
-public class AgendaFacilModelo implements Serializable{
+public class UBS implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id

@@ -6,9 +6,8 @@ package com.api.agendafacil.dtos;
  * */
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 
-public class AgendaFacilDto {
+public class UBSDto {
 	
 	@NotBlank
 	private String imagemUBS;
