@@ -1,21 +1,17 @@
 package com.api.agendafacil.dtos;
 
 import java.time.LocalDate;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+
+import com.api.agendafacil.models.Endereco;
 
 public class UsuarioDto {
 	
-	@NotBlank
-	private String nome;
-	@NotNull	
+	private String nome;	
 	private LocalDate nascimento;
-	@NotBlank
 	private String cpf;
-	@NotBlank
 	private String telefone;
-	@NotBlank
 	private String email;
+	private Endereco endereco;
 	
 	public String getNome() {
 		return nome;
@@ -46,5 +42,11 @@ public class UsuarioDto {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public Endereco getEndereco() {
+		return endereco;
+	}
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 }

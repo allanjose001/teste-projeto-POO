@@ -22,6 +22,14 @@ public class UsuarioService {
 		return repositorioUsuario.save(usuario);
 	}
 	
+	public boolean existsByCpf(String cpf) {
+		return repositorioUsuario.existsByCpf(cpf);
+	}
+	
+	public boolean existsByTelefone(String telefone) {
+		return repositorioUsuario.existsByTelefone(telefone);
+	}
+	
 	public List<Usuario> findAll() {
 		return repositorioUsuario.findAll();
 	}

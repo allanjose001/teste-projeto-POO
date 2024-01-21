@@ -4,11 +4,10 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.api.agendafacil.models.Usuario;
+
+import com.api.agendafacil.models.Consulta;
 
 @Repository
-public interface RepositorioUsuario extends JpaRepository<Usuario, UUID> {
+public interface RepositorioConsulta extends JpaRepository<Consulta, UUID> {
 	
-	boolean existsByCpf(String cpf);
-	boolean existsByTelefone(String telefone);
 }

@@ -11,14 +11,13 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
-@Entity(name = "TB_UBS")
-@Table(name = "TB_AGENDA_FACIL")
+@Entity
 public class UBS implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -29,15 +28,11 @@ public class UBS implements Serializable{
 	private String imagemUBS;
 	@Column(nullable = false, length = 200)
 	private String nomeUBS;
-	@Column(nullable = false, length = 200)
-	private String bairro;
-	@Column(nullable = false, length = 200)
-	private String rua;
 	@Column(nullable = false)
 	private LocalDateTime registrationDate;
-	@Column(nullable = false, length = 130)
-	private String nomeResponsavel;
-	
+	@Column(nullable = false, length = 200)
+	@Embedded
+	private Endereco endereco;
 	//getters e setters
 	
 	public UUID getId() {
@@ -58,30 +53,14 @@ public class UBS implements Serializable{
 	public void setNomeUBS(String nomeUBS) {
 		this.nomeUBS = nomeUBS;
 	}
-	public String getBairro() {
-		return bairro;
-	}
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
-	public String getRua() {
-		return rua;
-	}
-	public void setRua(String rua) {
-		this.rua = rua;
-	}
+
 	public LocalDateTime getRegistrationDate() {
 		return registrationDate;
 	}
 	public void setRegistrationDate(LocalDateTime registrationDate) {
 		this.registrationDate = registrationDate;
 	}
-	public String getNomeResponsavel() {
-		return nomeResponsavel;
-	}
-	public void setNomeResponsavel(String nomeResponsavel) {
-		this.nomeResponsavel = nomeResponsavel;
-	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
