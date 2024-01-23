@@ -1,0 +1,19 @@
+<<<<<<< HEAD
+C:\Users\geyso\Desktop\Projeto POO\AgendaFacil-main\src\main\java\com\api\agendafacil\AgendaFacilApplication.java
+C:\Users\geyso\Desktop\Projeto POO\AgendaFacil-main\src\main\java\com\api\agendafacil\configs\DateConfig.java
+C:\Users\geyso\Desktop\Projeto POO\AgendaFacil-main\src\main\java\com\api\agendafacil\services\AgendaFacilService.java
+C:\Users\geyso\Desktop\Projeto POO\AgendaFacil-main\src\main\java\com\api\agendafacil\models\AgendaFacilModelo.java
+C:\Users\geyso\Desktop\Projeto POO\AgendaFacil-main\src\main\java\com\api\agendafacil\repositories\RepositorioUBS.java
+C:\Users\geyso\Desktop\Projeto POO\AgendaFacil-main\src\main\java\com\api\agendafacil\dtos\AgendaFacilDto.java
+C:\Users\geyso\Desktop\Projeto POO\AgendaFacil-main\src\main\java\com\api\agendafacil\controllers\AgendaFacilController.java
+=======
+D:\projeto Agenda Facil\AgendaFacil\AgendaFacil-backend\src\main\java\com\api\agendafacil\configs\DateConfig.java
+D:\projeto Agenda Facil\AgendaFacil\AgendaFacil-backend\src\main\java\com\api\agendafacil\controllers\AgendaFacilController.java
+D:\projeto Agenda Facil\AgendaFacil\AgendaFacil-backend\src\main\java\com\api\agendafacil\models\Usuario.java
+D:\projeto Agenda Facil\AgendaFacil\AgendaFacil-backend\src\main\java\com\api\agendafacil\models\AgendaFacilModelo.java
+D:\projeto Agenda Facil\AgendaFacil\AgendaFacil-backend\src\main\java\com\api\agendafacil\repositories\RepositorioUBS.java
+D:\projeto Agenda Facil\AgendaFacil\AgendaFacil-backend\src\main\java\com\api\agendafacil\AgendaFacilApplication.java
+D:\projeto Agenda Facil\AgendaFacil\AgendaFacil-backend\src\main\java\com\api\agendafacil\dtos\AgendaFacilDto.java
+D:\projeto Agenda Facil\AgendaFacil\AgendaFacil-backend\src\main\java\com\api\agendafacil\services\AgendaFacilService.java
+D:\projeto Agenda Facil\AgendaFacil\AgendaFacil-backend\src\main\java\com\api\agendafacil\enums\TipoUsuario.java
+>>>>>>> beta
