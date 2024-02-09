@@ -7,9 +7,9 @@ import java.util.UUID;
 import com.api.agendafacil.models.UBS;
 
 public interface UBSServiceInterface {
-	UBS save(UBS ubs);
-	List<UBS> findAll();
-	Optional<UBS> findById(UUID id);
-	void delete(UBS ubs);
+	UBS saveUBS(UBS ubs);
+	List<UBS> getAllUBS();
+	Optional<UBS> findUBSById(UUID id);
+	void deleteUBS(UBS ubs);
 
 }

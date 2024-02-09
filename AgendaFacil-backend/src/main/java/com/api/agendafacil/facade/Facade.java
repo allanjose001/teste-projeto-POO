@@ -7,7 +7,9 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.api.agendafacil.models.Endereco;
 import com.api.agendafacil.models.UBS;
+import com.api.agendafacil.services.EnderecoService;
 import com.api.agendafacil.services.UBSService;
 import com.api.agendafacil.services.UsuarioService;
 
@@ -18,7 +20,7 @@ public class Facade {
 	@Autowired
 	private UBSService ubsService;
 	
-	public UBS save(UBS ubs) {
+	public UBS saveUBS(UBS ubs) {
 		//caso catch do erro (precisa ser pensado a respeito)
 		/*try {
 			return ubsService.save(ubs);
@@ -26,23 +28,46 @@ public class Facade {
 			throw new RuntimeException("erro ao salvar", e)
 		}
 		*/
-		return ubsService.save(ubs);
+		return ubsService.saveUBS(ubs);
 	}
 	
-	public List<UBS> findAll() {
-		return ubsService.findAll();
+	public List<UBS> getAllUBS() {
+		return ubsService.getAllUBS();
 	}
 
-	public Optional<UBS> findById(UUID id) {
-		return ubsService.findById(id);
+	public Optional<UBS> findUBSById(UUID id) {
+		return ubsService.findUBSById(id);
 	}
 
-	public void delete(UBS ubs) {
-		ubsService.delete(ubs);
+	public void deleteUBS(UBS ubs) {
+		ubsService.deleteUBS(ubs);
 	}
 	
 	//metodos como existsByNome não são necessarios aqui
 	//Usuario----------------------------------------------------------
-	private UsuarioService usuarioService;
+	private EnderecoService enderecoService;
+	
+	public Endereco saveEndereco(Endereco endereco) {
+		//caso catch do erro (precisa ser pensado a respeito)
+		/*try {
+			return ubsService.save(ubs);
+		} catch (Exception e) {
+			throw new RuntimeException("erro ao salvar", e)
+		}
+		*/
+		return enderecoService.saveEndereco(endereco);
+	}
+	
+	public List<Endereco> getAllEndereco() {
+		return enderecoService.getAllEndereco();
+	}
+
+	public Optional<Endereco> findEnderecoById(UUID id) {
+		return enderecoService.findEnderecoById(id);
+	}
+
+	public void deleteEndereco(Endereco endereco) {
+		enderecoService.deleteEndereco(endereco);
+	}
 	
 }

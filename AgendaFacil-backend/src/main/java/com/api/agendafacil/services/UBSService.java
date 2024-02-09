@@ -19,13 +19,13 @@ import com.api.agendafacil.repositories.RepositorioUBS;
 import jakarta.transaction.Transactional;
 
 @Service
-public class UBSService {
+public class UBSService implements UBSServiceInterface{
 
 	@Autowired
 	private RepositorioUBS repositorioUBS;
 	
 	@Transactional
-	public UBS save(UBS ubs) {
+	public UBS saveUBS(UBS ubs) {
 		return repositorioUBS.save(ubs);
 	}
 
@@ -33,16 +33,18 @@ public class UBSService {
 		return repositorioUBS.existsByNomeUBS(nomeUBS);
 	}
 
-	public List<UBS> findAll() {
+	public List<UBS> getAllUBS() {
 		return repositorioUBS.findAll();
 	}
 
-	public Optional<UBS> findById(UUID id) {
+	public Optional<UBS> findUBSById(UUID id) {
 		return repositorioUBS.findById(id);
+		//ideal adicionar or.ElseThrow()
 	}
 
 	@Transactional
-	public void delete(UBS ubs) {
+	public void deleteUBS(UBS ubs) {
 		repositorioUBS.delete(ubs);
+		//ideal adicionar or.ElseThrow()
 	}
 }

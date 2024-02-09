@@ -10,12 +10,13 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class UBS implements Serializable{
@@ -31,8 +32,9 @@ public class UBS implements Serializable{
 	@Column(nullable = false)
 	private LocalDateTime registrationDate;
 	@Column(nullable = false, length = 200)
-	@Embedded
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Endereco endereco;
+	
 	//getters e setters
 	
 	public UUID getId() {
@@ -61,7 +63,14 @@ public class UBS implements Serializable{
 		this.registrationDate = registrationDate;
 	}
 
+	public Endereco getEndereco() {
+		return endereco;
+	}
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
 }

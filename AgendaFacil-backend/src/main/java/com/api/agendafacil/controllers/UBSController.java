@@ -42,17 +42,17 @@ public class UBSController {
 		var ubs = new UBS();
 		BeanUtils.copyProperties(ubsDto, ubs);
 		ubs.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
-		return ResponseEntity.status(HttpStatus.CREATED).body(facade.save(ubs));
+		return ResponseEntity.status(HttpStatus.CREATED).body(facade.saveUBS(ubs));
 	}
 	
 	@GetMapping
 	public ResponseEntity<List<UBS>> getTodasUBS(){
-		return ResponseEntity.status(HttpStatus.OK).body(facade.findAll());
+		return ResponseEntity.status(HttpStatus.OK).body(facade.getAllUBS());
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Object> getUmaUBS(@PathVariable(value = "id") UUID id){
-		Optional<UBS> ubsOptional = facade.findById(id);
+		Optional<UBS> ubsOptional = facade.findUBSById(id);
 		if (!ubsOptional.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("UBS não encontrada");
 		}
@@ -61,17 +61,17 @@ public class UBSController {
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Object> deleteUBS(@PathVariable(value = "id") UUID id){
-		Optional<UBS> ubsOptional = facade.findById(id);
+		Optional<UBS> ubsOptional = facade.findUBSById(id);
 		if (!ubsOptional.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("UBS não encontrada");
 		}
-		facade.delete(ubsOptional.get());
+		facade.deleteUBS(ubsOptional.get());
 		return ResponseEntity.status(HttpStatus.OK).body("UBS removida com sucesso");
 	}
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<Object> updateUBS(@PathVariable(value = "id") UUID id, @RequestBody @Valid UBSDto ubsDto){
-		Optional<UBS> ubsOptional = facade.findById(id);
+		Optional<UBS> ubsOptional = facade.findUBSById(id);
 		if (!ubsOptional.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("UBS não encontrada");
 		}
@@ -79,6 +79,6 @@ public class UBSController {
 		BeanUtils.copyProperties(ubsDto, ubs);
 		ubs.setId(ubsOptional.get().getId());
 		ubs.setRegistrationDate(ubsOptional.get().getRegistrationDate());
-		return ResponseEntity.status(HttpStatus.OK).body(facade.save(ubs));
+		return ResponseEntity.status(HttpStatus.OK).body(facade.saveUBS(ubs));
 	}	
 }
