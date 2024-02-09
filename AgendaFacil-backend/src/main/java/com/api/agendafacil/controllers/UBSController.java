@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.agendafacil.dtos.UBSDto;
+import com.api.agendafacil.facade.Facade;
 import com.api.agendafacil.models.UBS;
-import com.api.agendafacil.services.UBSService;
 
 import jakarta.validation.Valid;
 
@@ -35,28 +35,24 @@ import jakarta.validation.Valid;
 public class UBSController {
 
 	@Autowired
-	private UBSService ubsService;
+	private Facade facade;;
 	
 	@PostMapping
 	public ResponseEntity<Object> saveUBS(@RequestBody @Valid UBSDto ubsDto) {		
-		if(ubsService.existsByNomeUBS(ubsDto.getNomeUBS())) {
-			return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflito: Nome de UBS em uso");
-		}
-		
 		var ubs = new UBS();
 		BeanUtils.copyProperties(ubsDto, ubs);
 		ubs.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
-		return ResponseEntity.status(HttpStatus.CREATED).body(ubsService.save(ubs));
+		return ResponseEntity.status(HttpStatus.CREATED).body(facade.save(ubs));
 	}
 	
 	@GetMapping
 	public ResponseEntity<List<UBS>> getTodasUBS(){
-		return ResponseEntity.status(HttpStatus.OK).body(ubsService.findAll());
+		return ResponseEntity.status(HttpStatus.OK).body(facade.findAll());
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Object> getUmaUBS(@PathVariable(value = "id") UUID id){
-		Optional<UBS> ubsOptional = ubsService.findById(id);
+		Optional<UBS> ubsOptional = facade.findById(id);
 		if (!ubsOptional.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("UBS não encontrada");
 		}
@@ -65,17 +61,17 @@ public class UBSController {
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Object> deleteUBS(@PathVariable(value = "id") UUID id){
-		Optional<UBS> ubsOptional = ubsService.findById(id);
+		Optional<UBS> ubsOptional = facade.findById(id);
 		if (!ubsOptional.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("UBS não encontrada");
 		}
-		ubsService.delete(ubsOptional.get());
+		facade.delete(ubsOptional.get());
 		return ResponseEntity.status(HttpStatus.OK).body("UBS removida com sucesso");
 	}
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<Object> updateUBS(@PathVariable(value = "id") UUID id, @RequestBody @Valid UBSDto ubsDto){
-		Optional<UBS> ubsOptional = ubsService.findById(id);
+		Optional<UBS> ubsOptional = facade.findById(id);
 		if (!ubsOptional.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("UBS não encontrada");
 		}
@@ -83,6 +79,6 @@ public class UBSController {
 		BeanUtils.copyProperties(ubsDto, ubs);
 		ubs.setId(ubsOptional.get().getId());
 		ubs.setRegistrationDate(ubsOptional.get().getRegistrationDate());
-		return ResponseEntity.status(HttpStatus.OK).body(ubsService.save(ubs));
+		return ResponseEntity.status(HttpStatus.OK).body(facade.save(ubs));
 	}	
 }

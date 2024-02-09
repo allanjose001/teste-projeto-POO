@@ -34,14 +34,7 @@ public class UsuarioController {
 	private UsuarioService usuarioService;
 	
 	@PostMapping
-	public ResponseEntity<Object> saveUsuario(@RequestBody @Valid UsuarioDto usuarioDto) {
-		if(usuarioService.existsByCpf(usuarioDto.getCpf())) {
-			return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflito: CPF em uso");
-		}
-		if(usuarioService.existsByTelefone(usuarioDto.getTelefone())) {
-			return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflito: Telefone em uso");
-		}
-		
+	public ResponseEntity<Object> saveUsuario(@RequestBody @Valid UsuarioDto usuarioDto) {				
 		var usuario = new Usuario();
 		BeanUtils.copyProperties(usuarioDto, usuario);
 		//usuario.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));

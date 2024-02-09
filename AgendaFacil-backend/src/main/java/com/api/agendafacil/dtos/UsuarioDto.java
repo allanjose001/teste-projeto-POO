@@ -1,29 +1,45 @@
 package com.api.agendafacil.dtos;
 
 import java.time.LocalDate;
+import java.util.Set;
 
-import com.api.agendafacil.models.Endereco;
+import com.api.agendafacil.enums.TipoUsuario;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class UsuarioDto {
 	
-	private String nome;	
-	private LocalDate nascimento;
+	@NotBlank
+	private String nome;
+	@NotNull
+	private LocalDate dataDeNascimento;
+	@NotBlank
 	private String cpf;
+	@NotBlank
+	private String sus;
 	private String telefone;
 	private String email;
-	private Endereco endereco;
+	private Set<TipoUsuario> roles;
 	
+	
+	public String getSus() {
+		return sus;
+	}
+	public void setSus(String sus) {
+		this.sus = sus;
+	}
 	public String getNome() {
 		return nome;
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public LocalDate getNascimento() {
-		return nascimento;
+	public LocalDate getDataDeNascimento() {
+		return dataDeNascimento;
 	}
-	public void setNascimento(LocalDate nascimento) {
-		this.nascimento = nascimento;
+	public void setDataDeNascimento(LocalDate dataDeNascimento) {
+		this.dataDeNascimento = dataDeNascimento;
 	}
 	public String getCpf() {
 		return cpf;
@@ -43,10 +59,10 @@ public class UsuarioDto {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Endereco getEndereco() {
-		return endereco;
+	public Set<TipoUsuario> getRoles() {
+		return roles;
 	}
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
+	public void setRoles(Set<TipoUsuario> roles) {
+		this.roles = roles;
 	}
 }

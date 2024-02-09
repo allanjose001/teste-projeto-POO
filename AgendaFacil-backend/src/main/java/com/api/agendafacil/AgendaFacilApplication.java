@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AgendaFacilApplication {
 
- 	public static void main(String[] args) { SpringApplication.run(AgendaFacilApplication.class, args); }
-	
- 	@GetMapping("/")
-	public String index() {
-		return "Seila";
-		
-	}
+    public static void main(String[] args) {
+    	// servira para nos ajudar a instanciar objetos e manipular eles;
+        SpringApplication.run(AgendaFacilApplication.class, args);
+    }
+
+    @GetMapping("/")
+    public String index() {
+        return "Seila";
+    }
 }

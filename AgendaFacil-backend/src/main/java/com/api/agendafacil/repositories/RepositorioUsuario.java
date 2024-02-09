@@ -9,6 +9,4 @@ import com.api.agendafacil.models.Usuario;
 @Repository
 public interface RepositorioUsuario extends JpaRepository<Usuario, UUID> {
 	
-	boolean existsByCpf(String cpf);
-	boolean existsByTelefone(String telefone);
 }

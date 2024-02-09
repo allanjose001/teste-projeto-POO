@@ -1,3 +1,4 @@
+
 package com.api.agendafacil.configs;
 
 //Classe criada para corrigir um problema na exibição e inserção de data e hora
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.Primary;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+
 
 @Configuration
 public class DateConfig {
@@ -27,3 +29,4 @@ public class DateConfig {
 	}
 
 }
+
