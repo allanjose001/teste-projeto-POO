@@ -8,10 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.api.agendafacil.models.Endereco;
+import com.api.agendafacil.models.ProfissionalSaude;
 import com.api.agendafacil.models.UBS;
 import com.api.agendafacil.services.EnderecoService;
+import com.api.agendafacil.services.ProfissionalSaudeService;
 import com.api.agendafacil.services.UBSService;
-import com.api.agendafacil.services.UsuarioService;
 
 @Service
 public class Facade {
@@ -44,7 +45,7 @@ public class Facade {
 	}
 	
 	//metodos como existsByNome não são necessarios aqui
-	//Usuario----------------------------------------------------------
+	//Endereco----------------------------------------------------------
 	private EnderecoService enderecoService;
 	
 	public Endereco saveEndereco(Endereco endereco) {
@@ -69,5 +70,33 @@ public class Facade {
 	public void deleteEndereco(Endereco endereco) {
 		enderecoService.deleteEndereco(endereco);
 	}
+	
+	//ProfissionalSaude------------------------------------------------
+	@Autowired
+	private ProfissionalSaudeService profissionalSaudeService;
+	
+	public ProfissionalSaude saveProfissionalSaude(ProfissionalSaude profissionalSaude) {
+		//caso catch do erro (precisa ser pensado a respeito)
+		/*try {
+			return ubsService.save(ubs);
+		} catch (Exception e) {
+			throw new RuntimeException("erro ao salvar", e)
+		}
+		*/
+		return profissionalSaudeService.saveProfissionalSaude(profissionalSaude);
+	}
+	
+	public List<ProfissionalSaude> getAllProfissionalSaude() {
+		return profissionalSaudeService.getAllProfissionalSaude();
+	}
+
+	public Optional<ProfissionalSaude> findProfissionalSaudeById(UUID id) {
+		return profissionalSaudeService.findProfissionalSaudeById(id);
+	}
+
+	public void deleteProfissionalSaude(ProfissionalSaude profissionalSaude) {
+		profissionalSaudeService.deleteProfissionalSaude(profissionalSaude);
+	}
+	
 	
 }
