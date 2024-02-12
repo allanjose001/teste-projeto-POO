@@ -1,11 +1,6 @@
 package com.api.agendafacil.services;
-import org.springframework.beans.BeanUtils;
-
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
+import com.api.agendafacil.enums.TipoDeConsulta;
 import java.util.List;
-import com.api.agendafacil.dtos.AgendamentoDto;
-
 import java.util.Optional;
 import java.util.UUID;
 
@@ -25,6 +20,18 @@ public class AgendamentoService {
 	
 	@Transactional
 	public Agendamento save(Agendamento agendamento) {
+		//verificar se tem vagas disponiveis para o tipo do agendamento
+		TipoDeConsulta tipoConsulta=agendamento.getTipoConsulta();
+		if(tipoConsulta!=null && tipoConsulta.getVagasDisponiveis()>0) {
+			//condição aceita, agendamento efetuuado
+			Agendamento novoAgendamento=repositorioAgendamento.save(agendamento);
+			//agora vamos atualizar as vagas disponiveis.
+			tipoConsulta.setVagasDisponiveis(tipoConsulta.getVagasDisponiveis()-1);
+			return novoAgendamento;
+		}else {
+			//! precisa implementar o throw qui em vez de deixar esse Sysout <fazer um tratamento personalizado>
+			System.out.println("não tem vagas disponiveis");
+		}
 		return repositorioAgendamento.save(agendamento);
 	}
 	public List<Agendamento> findAll() {
@@ -35,26 +42,14 @@ public class AgendamentoService {
 		return repositorioAgendamento.findById(id);
 	}
 	
+	//implementei amesma logica do save a diferença é que eu adicionei mais uma vaga
 	@Transactional
 	public void delete(Agendamento agendamento) {
-		repositorioAgendamento.delete(agendamento);
+		TipoDeConsulta tipoConsulta=agendamento.getTipoConsulta();
+		if(tipoConsulta!=null && tipoConsulta.getVagasDisponiveis()>0) {
+			repositorioAgendamento.delete(agendamento);
+			tipoConsulta.setVagasDisponiveis(tipoConsulta.getVagasDisponiveis()+1);
+		}
+		
 	}
-	 @Transactional
-	    public void updateAgendamento(Agendamento agendamento, AgendamentoDto agendamentoDto) {
-	        // Verifica se a data da consulta é válida
-	        LocalDate dataAtual = LocalDate.now();
-	        LocalDate dataAgendamentoOriginal = agendamentoDto.getDataConsulta();
-	        
-	        // Verifica se a nova data de consulta é pelo menos 2 dias depois da data atual
-	        long diferencaDias = ChronoUnit.DAYS.between(dataAtual, dataAgendamentoOriginal);
-	        if (diferencaDias < 1) {
-	            throw new IllegalArgumentException("Não é possível alterar o agendamento com menos de 2 dias de antecedência.");
-	        }else {
-	        // Copia as propriedades do DTO para a entidade Agendamento
-	        BeanUtils.copyProperties(agendamentoDto, agendamento);
-
-	        // Salva o agendamento atualizado
-	        repositorioAgendamento.save(agendamento);
-	        }
-	    }    
-	}
+}
