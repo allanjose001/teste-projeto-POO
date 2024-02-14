@@ -13,13 +13,13 @@ import com.api.agendafacil.repositories.RepositorioAgendamento;
 import jakarta.transaction.Transactional;
 
 @Service
-public class AgendamentoService {
+public class AgendamentoService implements AgendamentoServiceInterface {
 
 	@Autowired
 	private RepositorioAgendamento repositorioAgendamento;
 	
 	@Transactional
-	public Agendamento save(Agendamento agendamento) {
+	public Agendamento saveAgendamento(Agendamento agendamento) {
 		//verificar se tem vagas disponiveis para o tipo do agendamento
 		TipoDeConsulta tipoConsulta=agendamento.getTipoConsulta();
 		if(tipoConsulta!=null && tipoConsulta.getVagasDisponiveis()>0) {
@@ -34,17 +34,17 @@ public class AgendamentoService {
 		}
 		return repositorioAgendamento.save(agendamento);
 	}
-	public List<Agendamento> findAll() {
+	public List<Agendamento> getAllAgendamento() {
 		return repositorioAgendamento.findAll();
 	}
 	
-	public Optional<Agendamento> findById(UUID id) {
+	public Optional<Agendamento> findAgendamentoById(UUID id) {
 		return repositorioAgendamento.findById(id);
 	}
 	
 	//implementei amesma logica do save a diferença é que eu adicionei mais uma vaga
 	@Transactional
-	public void delete(Agendamento agendamento) {
+	public void deleteAgendamento(Agendamento agendamento) {
 		TipoDeConsulta tipoConsulta=agendamento.getTipoConsulta();
 		if(tipoConsulta!=null && tipoConsulta.getVagasDisponiveis()>0) {
 			repositorioAgendamento.delete(agendamento);

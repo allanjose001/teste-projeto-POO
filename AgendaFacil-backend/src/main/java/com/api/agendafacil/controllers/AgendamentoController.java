@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.agendafacil.dtos.AgendamentoDto;
+import com.api.agendafacil.facade.Facade;
 import com.api.agendafacil.models.Agendamento;
-import com.api.agendafacil.services.AgendamentoService;
 
 import jakarta.validation.Valid;
 
@@ -28,16 +29,16 @@ import jakarta.validation.Valid;
 public class AgendamentoController {
 
 	@Autowired
-	private AgendamentoService agendamentoService;
+	private Facade facade;
 	
 	@GetMapping
 	public ResponseEntity<List<Agendamento>> getTodosAgendamentos(){
-		return ResponseEntity.status(HttpStatus.OK).body(agendamentoService.findAll());
+		return ResponseEntity.status(HttpStatus.OK).body(facade.getAllAgendamento());
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Object> getUmAgendamento(@PathVariable(value = "id") UUID id){
-		Optional<Agendamento> agendamentoOptional = agendamentoService.findById(id);
+		Optional<Agendamento> agendamentoOptional = facade.findAgendamentoById(id);
 		if (!agendamentoOptional.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Agendamento não encontrado");
 		}
@@ -46,23 +47,23 @@ public class AgendamentoController {
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Object> deleteAgendamento(@PathVariable(value = "id") UUID id){
-		Optional<Agendamento> agendamentoOptional = agendamentoService.findById(id);
+		Optional<Agendamento> agendamentoOptional = facade.findAgendamentoById(id);
 		if (!agendamentoOptional.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Agendamento não encontrado");
 		}
-		agendamentoService.delete(agendamentoOptional.get());
+		facade.deleteAgendamento(agendamentoOptional.get());
 		return ResponseEntity.status(HttpStatus.OK).body("Agendamento removido com sucesso");
 	}
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<Object> updateAgendamento(@PathVariable(value = "id") UUID id, @RequestBody @Valid AgendamentoDto agendamentoDto){
-		Optional<Agendamento> agendamentoOptional = agendamentoService.findById(id);
+		Optional<Agendamento> agendamentoOptional = facade.findAgendamentoById(id);
 		if (!agendamentoOptional.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Agendamento não encontrado");
 		}
-		Agendamento agendamento = agendamentoOptional.get();
-		agendamentoService.updateAgendamento(agendamento, agendamentoDto);
-		//agendamento.setRegistrationDate(ubsOptional.get().getRegistrationDate());
-		return ResponseEntity.status(HttpStatus.OK).body(agendamento);
+		var agendamento = new Agendamento();
+		BeanUtils.copyProperties(agendamentoDto, agendamento);
+		agendamento.setId(agendamentoOptional.get().getId());
+		return ResponseEntity.status(HttpStatus.OK).body(facade.saveAgendamento(agendamento));
 	}
 }

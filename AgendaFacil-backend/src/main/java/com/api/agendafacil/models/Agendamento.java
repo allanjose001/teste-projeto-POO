@@ -28,7 +28,7 @@ public class Agendamento implements Serializable {
 	@Column(nullable=false)
 	private LocalDate dataConsulta;
 	
-	@Column(nullable=false, length=200,columnDefinition = "smallint USING tipo_consulta::smallint")
+	@Column(nullable=false)
 	private TipoDeConsulta tipoConsulta;
 	
 	//getters e setters

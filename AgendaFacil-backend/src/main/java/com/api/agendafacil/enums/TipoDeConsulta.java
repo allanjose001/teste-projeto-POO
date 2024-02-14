@@ -8,7 +8,7 @@ public enum TipoDeConsulta {
 	// Criação de um construtor para me dar acesso a quantidade de vagas que tenho disponiveis
 	private int vagasDisponiveis;
 	TipoDeConsulta(int vagasDisponiveis) {
-		// TODO Auto-generated constructor stub
+
 	}
 	public int getVagasDisponiveis() {
 		return vagasDisponiveis;

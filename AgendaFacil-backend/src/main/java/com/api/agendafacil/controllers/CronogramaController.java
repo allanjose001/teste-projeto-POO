@@ -9,8 +9,10 @@ import com.api.agendafacil.services.CronogramaService;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/cronograma")
 public class CronogramaController {
+	
 	@Autowired
     private CronogramaService cronogramaService;
 

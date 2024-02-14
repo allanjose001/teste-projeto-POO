@@ -18,4 +18,6 @@ public class CronogramaService {
     public List<Cronograma> listarEventos() {
         return cronogramaRepository.findAll();
     }
+    
+    //adicionar delete e editar
 }

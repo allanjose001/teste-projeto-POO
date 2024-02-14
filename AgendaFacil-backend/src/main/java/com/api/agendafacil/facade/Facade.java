@@ -7,12 +7,15 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.api.agendafacil.models.Agendamento;
 import com.api.agendafacil.models.Endereco;
 import com.api.agendafacil.models.ProfissionalSaude;
 import com.api.agendafacil.models.UBS;
+import com.api.agendafacil.services.AgendamentoService;
 import com.api.agendafacil.services.EnderecoService;
 import com.api.agendafacil.services.ProfissionalSaudeService;
 import com.api.agendafacil.services.UBSService;
+
 
 @Service
 public class Facade {
@@ -96,6 +99,33 @@ public class Facade {
 
 	public void deleteProfissionalSaude(ProfissionalSaude profissionalSaude) {
 		profissionalSaudeService.deleteProfissionalSaude(profissionalSaude);
+	}
+	
+	//Agendamento--------------------------------------------------------------
+	@Autowired
+	private AgendamentoService agendamentoService;
+	
+	public Agendamento saveAgendamento(Agendamento agendamento) {
+		//caso catch do erro (precisa ser pensado a respeito)
+		/*try {
+			return ubsService.save(ubs);
+		} catch (Exception e) {
+			throw new RuntimeException("erro ao salvar", e)
+		}
+		*/
+		return agendamentoService.saveAgendamento(agendamento);
+	}
+	
+	public List<Agendamento> getAllAgendamento() {
+		return agendamentoService.getAllAgendamento();
+	}
+
+	public Optional<Agendamento> findAgendamentoById(UUID id) {
+		return agendamentoService.findAgendamentoById(id);
+	}
+
+	public void deleteAgendamento(Agendamento agendamento) {
+		agendamentoService.deleteAgendamento(agendamento);
 	}
 	
 	
