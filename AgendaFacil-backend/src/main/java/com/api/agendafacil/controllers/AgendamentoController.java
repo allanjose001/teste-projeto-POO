@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +26,7 @@ import jakarta.validation.Valid;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/agendamento")
 public class AgendamentoController {
-	
+
 	@Autowired
 	private AgendamentoService agendamentoService;
 	
@@ -61,10 +60,9 @@ public class AgendamentoController {
 		if (!agendamentoOptional.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Agendamento não encontrado");
 		}
-		var agendamento = new Agendamento();
-		BeanUtils.copyProperties(agendamentoDto, agendamento);
-		agendamento.setId(agendamentoOptional.get().getId());
+		Agendamento agendamento = agendamentoOptional.get();
+		agendamentoService.updateAgendamento(id, agendamentoDto);
 		//agendamento.setRegistrationDate(ubsOptional.get().getRegistrationDate());
-		return ResponseEntity.status(HttpStatus.OK).body(agendamentoService.save(agendamento));
+		return ResponseEntity.status(HttpStatus.OK).body(agendamento);
 	}
 }

@@ -1,5 +1,6 @@
 package com.api.agendafacil.services;
-
+import com.api.agendafacil.dtos.AgendamentoDto;
+import com.api.agendafacil.enums.TipoDeConsulta;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -20,6 +21,18 @@ public class AgendamentoService {
 	
 	@Transactional
 	public Agendamento save(Agendamento agendamento) {
+		//verificar se tem vagas disponiveis para o tipo do agendamento
+		TipoDeConsulta tipoConsulta=agendamento.getTipoConsulta();
+		if(tipoConsulta!=null && tipoConsulta.getVagasDisponiveis()>0) {
+			//condição aceita, agendamento efetuuado
+			Agendamento novoAgendamento=repositorioAgendamento.save(agendamento);
+			//agora vamos atualizar as vagas disponiveis.
+			tipoConsulta.setVagasDisponiveis(tipoConsulta.getVagasDisponiveis()-1);
+			return novoAgendamento;
+		}else {
+			//! precisa implementar o throw qui em vez de deixar esse Sysout <fazer um tratamento personalizado>
+			System.out.println("não tem vagas disponiveis");
+		}
 		return repositorioAgendamento.save(agendamento);
 	}
 	public List<Agendamento> findAll() {
@@ -29,9 +42,28 @@ public class AgendamentoService {
 	public Optional<Agendamento> findById(UUID id) {
 		return repositorioAgendamento.findById(id);
 	}
+	public Agendamento updateAgendamento(UUID id, AgendamentoDto agendamentoDto) {
+		Optional<Agendamento> agendamentoOptional = findById(id);
+	    if (agendamentoOptional.isPresent()) {
+	       Agendamento agendamento = agendamentoOptional.get();
+	            agendamento.setTipoConsulta(agendamentoDto.getTipoConsulta());
+	            agendamento.setDataConsulta(agendamentoDto.getDataConsulta());
+	            return repositorioAgendamento.save(agendamento);
+	     } else {
+	            // Se o agendamento não for encontrado, você pode lançar uma exceção ou retornar null, dependendo dos requisitos da sua aplicação
+	         return null;
+	        }
+	}
 	
+	//implementei amesma logica do save a diferença é que eu adicionei mais uma vaga
 	@Transactional
 	public void delete(Agendamento agendamento) {
-		repositorioAgendamento.delete(agendamento);
+		TipoDeConsulta tipoConsulta=agendamento.getTipoConsulta();
+		if(tipoConsulta!=null && tipoConsulta.getVagasDisponiveis()>0) {
+			repositorioAgendamento.delete(agendamento);
+			tipoConsulta.setVagasDisponiveis(tipoConsulta.getVagasDisponiveis()+1);
+		}
+		
 	}
+	
 }

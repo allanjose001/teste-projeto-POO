@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.UUID;
 
+import com.api.agendafacil.enums.TipoDeConsulta;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+
 
 @Entity
 public class Agendamento implements Serializable {
@@ -25,9 +28,9 @@ public class Agendamento implements Serializable {
 	
 	@Column(nullable=false)
 	private LocalDate dataConsulta;
+
 	
-	@Column(nullable=false, length=200)
-	private String tipoConsulta;
+	private TipoDeConsulta tipoConsulta;
 	
 	//getters e setters
 	
@@ -49,10 +52,10 @@ public class Agendamento implements Serializable {
 	public void setDataConsulta(LocalDate dataConsulta) {
 		this.dataConsulta = dataConsulta;
 	}
-	public String getTipoConsulta() {
+	public TipoDeConsulta getTipoConsulta() {
 		return tipoConsulta;
 	}
-	public void setTipoConsulta(String tipoConsulta) {
+	public void setTipoConsulta(TipoDeConsulta tipoConsulta) {
 		this.tipoConsulta = tipoConsulta;
 	}
 	public static long getSerialversiouid() {

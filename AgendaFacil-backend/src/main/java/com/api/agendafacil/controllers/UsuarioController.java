@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.api.agendafacil.dtos.UsuarioDto;
 import com.api.agendafacil.models.Usuario;
+import com.api.agendafacil.models.UsuarioLogin;
 import com.api.agendafacil.services.UsuarioService;
 
 import jakarta.validation.Valid;
@@ -33,11 +34,28 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService usuarioService;
 	
+	 @PostMapping("/authenticate")
+	    public ResponseEntity<Object> autenticarUsuario(@RequestBody UsuarioLogin request) {
+	        String nome = request.getNome();
+	        String senha = request.getSenha();
+	        
+	        log.debug("tentando autenticar para o nome : {}", nome);
+	        
+	        Usuario usuarioAutenticado = usuarioService.autenticarUsuario(nome, senha);
+	        
+	        if (usuarioAutenticado != null) {
+	            // Autenticação bem-sucedida, retornar um token de autenticação ou qualquer outra informação necessária
+	            return ResponseEntity.ok().body("Autenticação bem-sucedida. Token de autenticação ou outras informações aqui...");
+	        } else {
+	            // Autenticação falhou
+	            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Autenticação falhou. Nome de usuário ou senha inválidos.");
+	        }
+	    }
+	
 	@PostMapping
 	public ResponseEntity<Object> saveUsuario(@RequestBody @Valid UsuarioDto usuarioDto) {				
 		var usuario = new Usuario();
 		BeanUtils.copyProperties(usuarioDto, usuario);
-		//usuario.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
 		return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.save(usuario));
 	}
 	
@@ -74,7 +92,6 @@ public class UsuarioController {
 		var usuario = new Usuario();
 		BeanUtils.copyProperties(usuarioDto, usuario);
 		usuario.setId(usuarioOptional.get().getId());
-		//usuario.setRegistrationDate(usuarioOptional.get().getRegistrationDate());
 		return ResponseEntity.status(HttpStatus.OK).body(usuarioService.save(usuario));
 	}	
 	

@@ -1,4 +1,5 @@
 package com.api.agendafacil.dtos;
+import com.api.agendafacil.enums.TipoDeConsulta;
 import com.api.agendafacil.models.Usuario;
 import java.time.LocalDate;
 
@@ -8,17 +9,17 @@ import jakarta.validation.constraints.NotNull;
 public class AgendamentoDto {
 	
 	@NotBlank
-	private String tipoConsulta;
+	private  TipoDeConsulta tipoConsulta;
 	@NotNull
 	private LocalDate dataConsulta;
 	@NotNull
 	private Usuario usuario;
 	
 	//Getters e Setters
-	public String getTipoConsulta() {
+	public TipoDeConsulta getTipoConsulta() {
 		return tipoConsulta;
 	}
-	public void setTipoConsulta(String tipoConsulta) {
+	public void setTipoConsulta(TipoDeConsulta tipoConsulta) {
 		this.tipoConsulta = tipoConsulta;
 	}
 	public LocalDate getDataConsulta() {
