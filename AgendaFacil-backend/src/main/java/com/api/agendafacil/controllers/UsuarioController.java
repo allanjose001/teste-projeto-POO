@@ -1,6 +1,5 @@
 package com.api.agendafacil.controllers;
 
-
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -20,9 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.agendafacil.dtos.UsuarioDto;
+import com.api.agendafacil.facade.Facade;
 import com.api.agendafacil.models.Usuario;
-import com.api.agendafacil.models.UsuarioLogin;
-import com.api.agendafacil.services.UsuarioService;
 
 import jakarta.validation.Valid;
 
@@ -31,42 +29,25 @@ import jakarta.validation.Valid;
 @RequestMapping("/usuario")
 public class UsuarioController {
 	
-	@Autowired
-	private UsuarioService usuarioService;
 	
-	 @PostMapping("/authenticate")
-	    public ResponseEntity<Object> autenticarUsuario(@RequestBody UsuarioLogin request) {
-	        String nome = request.getNome();
-	        String senha = request.getSenha();
-	        
-	        log.debug("tentando autenticar para o nome : {}", nome);
-	        
-	        Usuario usuarioAutenticado = usuarioService.autenticarUsuario(nome, senha);
-	        
-	        if (usuarioAutenticado != null) {
-	            // Autenticação bem-sucedida, retornar um token de autenticação ou qualquer outra informação necessária
-	            return ResponseEntity.ok().body("Autenticação bem-sucedida. Token de autenticação ou outras informações aqui...");
-	        } else {
-	            // Autenticação falhou
-	            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Autenticação falhou. Nome de usuário ou senha inválidos.");
-	        }
-	    }
+	@Autowired
+	private Facade facade;
 	
 	@PostMapping
 	public ResponseEntity<Object> saveUsuario(@RequestBody @Valid UsuarioDto usuarioDto) {				
 		var usuario = new Usuario();
 		BeanUtils.copyProperties(usuarioDto, usuario);
-		return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.save(usuario));
+		return ResponseEntity.status(HttpStatus.CREATED).body(facade.saveUsuario(usuario));
 	}
 	
 	@GetMapping
 	public ResponseEntity<List<Usuario>> getTodosUsuarios(){
-		return ResponseEntity.status(HttpStatus.OK).body(usuarioService.findAll());
+		return ResponseEntity.status(HttpStatus.OK).body(facade.getAllUsuario());
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Object> getUmUsuario(@PathVariable(value = "id") UUID id){
-		Optional<Usuario> usuarioOptional = usuarioService.findById(id);
+		Optional<Usuario> usuarioOptional = facade.findUsuarioById(id);
 		if (!usuarioOptional.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Paciente não encontrado");
 		}
@@ -75,24 +56,24 @@ public class UsuarioController {
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Object> deleteUsuario(@PathVariable(value = "id") UUID id){
-		Optional<Usuario> usuarioOptional = usuarioService.findById(id);
+		Optional<Usuario> usuarioOptional = facade.findUsuarioById(id);
 		if (!usuarioOptional.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario não encontrado");
 		}
-		usuarioService.delete(usuarioOptional.get());
+		facade.deleteUsuario(usuarioOptional.get());
 		return ResponseEntity.status(HttpStatus.OK).body("Usuario removido com sucesso");
 	}
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<Object> updateUsuario(@PathVariable(value = "id") UUID id, @RequestBody @Valid UsuarioDto usuarioDto){
-		Optional<Usuario> usuarioOptional = usuarioService.findById(id);
+		Optional<Usuario> usuarioOptional = facade.findUsuarioById(id);
 		if (!usuarioOptional.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario não encontrado");
 		}
 		var usuario = new Usuario();
 		BeanUtils.copyProperties(usuarioDto, usuario);
 		usuario.setId(usuarioOptional.get().getId());
-		return ResponseEntity.status(HttpStatus.OK).body(usuarioService.save(usuario));
+		return ResponseEntity.status(HttpStatus.OK).body(facade.saveUsuario(usuario));
 	}	
 	
 }

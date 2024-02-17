@@ -19,12 +19,14 @@ public class CronogramaService {
         cronogramaRepository.save(cronograma);
     }
 
+  	//metodo de usuario ver a lista
+  	
     public List<Cronograma> listarEventos() {
         return cronogramaRepository.findAll();
     }
     
     //vamos procurar o id e caso ele seja encontrado no nosso cronograma vamos atualizar ele, comm s novos ddados
-  //com essa anotação configuramos a nossa aplicação apenas para o admin ter acesso ao metodo
+    //com essa anotação configuramos a nossa aplicação apenas para o admin ter acesso ao metodo
   	@PreAuthorize("hasRole('ROLE_ADMIN')")
     public void atualizarEvento(UUID id, Cronograma novoCronograma) {
         Cronograma cronogramaExistente = cronogramaRepository.findById(id)

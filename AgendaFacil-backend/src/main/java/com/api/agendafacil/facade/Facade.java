@@ -10,9 +10,12 @@ import org.springframework.stereotype.Service;
 import com.api.agendafacil.models.Endereco;
 import com.api.agendafacil.models.ProfissionalSaude;
 import com.api.agendafacil.models.UBS;
+import com.api.agendafacil.models.Usuario;
+import com.api.agendafacil.services.AuthUsuarioService;
 import com.api.agendafacil.services.EnderecoService;
 import com.api.agendafacil.services.ProfissionalSaudeService;
 import com.api.agendafacil.services.UBSService;
+import com.api.agendafacil.services.UsuarioService;
 
 @Service
 public class Facade {
@@ -97,6 +100,47 @@ public class Facade {
 	public void deleteProfissionalSaude(ProfissionalSaude profissionalSaude) {
 		profissionalSaudeService.deleteProfissionalSaude(profissionalSaude);
 	}
+	
+	//Usuario--------------------------------------------------------------------------------------
+	@Autowired
+	private UsuarioService usuarioService;
+	
+	public Usuario saveUsuario(Usuario usuario) {
+		return usuarioService.saveUsuario(usuario);
+	}
+	
+	public List<Usuario> getAllUsuario() {
+		return usuarioService.getAllUsuario();
+	}
+	
+	public Optional<Usuario> findUsuarioById(UUID id) {
+		return usuarioService.findUsuarioById(id);
+	}
+	
+	public void deleteUsuario(Usuario usuario) {
+		usuarioService.deleteUsuario(usuario);
+	}
+	
+	//AuthUsuario------------------------------------------------------------------------------
+	
+	@Autowired
+	private AuthUsuarioService authUsuarioService;
+	
+	public Usuario autenticarUsuario(String nome, String senha) {
+		return authUsuarioService.autenticarUsuario(nome,senha);
+	}
+	
+	//Metodos dos admin-----------------------------------------------------------------------------
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

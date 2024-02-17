@@ -8,5 +8,5 @@ import com.api.agendafacil.models.Usuario;
 
 @Repository
 public interface RepositorioUsuario extends JpaRepository<Usuario, UUID> {
-	
+	Usuario findByNome(String nome);
 }

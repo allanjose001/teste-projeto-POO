@@ -22,7 +22,6 @@ public class ConsultaService {
 		return repositorioConsulta.save(consulta);
 	}
 
-
 	public List<Consulta> findAll() {
 		return repositorioConsulta.findAll();
 	}

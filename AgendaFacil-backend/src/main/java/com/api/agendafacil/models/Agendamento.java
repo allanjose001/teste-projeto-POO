@@ -29,7 +29,6 @@ public class Agendamento implements Serializable {
 	@Column(nullable=false)
 	private LocalDate dataConsulta;
 
-	
 	private TipoDeConsulta tipoConsulta;
 	
 	//getters e setters

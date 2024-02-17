@@ -30,7 +30,7 @@ import jakarta.validation.Valid;
 public class EnderecoController {
 
 	@Autowired
-	private Facade facade;;
+	private Facade facade;
 	
 	@PostMapping
 	public ResponseEntity<Object> saveEndereco(@RequestBody @Valid EnderecoDto enderecoDto) {		

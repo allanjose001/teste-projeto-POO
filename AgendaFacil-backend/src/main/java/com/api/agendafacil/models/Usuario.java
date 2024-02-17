@@ -40,8 +40,7 @@ public class Usuario implements Serializable{
 	private String telefone;
 	@Column(nullable = false, length = 200)
 	private String email;
-	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-	private UsuarioLogin usuarioLogin;
+	private String senha;
 	
 	@ElementCollection(targetClass = TipoUsuario.class, fetch = FetchType.EAGER)
 	@CollectionTable(name = "usuario_roles")
@@ -49,27 +48,23 @@ public class Usuario implements Serializable{
 	@Column(name = "role")
 	private Set<TipoUsuario> roles;
 
-	public Usuario(UUID id, String nome, LocalDate dataDeNascimento, String cpf, String telefone, String email) {
+	public Usuario(UUID id, String nome, LocalDate dataDeNascimento, String cpf, String telefone, String email, String senha) {
 		this.id = id;
 		this.nome = nome;
 		this.dataDeNascimento = dataDeNascimento;
 		this.cpf = cpf;
 		this.telefone = telefone;
 		this.email = email;
+		this.senha = senha;
 		this.addRole(TipoUsuario.USUARIO);
-	}
-	public UsuarioLogin getUsuarioLogin() {
-	    return usuarioLogin;
-	}
-
-	public void setUsuarioLogin(UsuarioLogin usuarioLogin) {
-	    this.usuarioLogin = usuarioLogin;
 	}
 	
 	public Usuario() {
 		this.addRole(TipoUsuario.USUARIO);
 		
 	}
+	
+	//getters e setters
 	
 	public void addRole(TipoUsuario role) {
 		if (this.roles == null) {
@@ -119,6 +114,12 @@ public class Usuario implements Serializable{
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getSenha() {
+		return senha;
+	}
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 	public Set<TipoUsuario> getRoles() {
 		return roles;

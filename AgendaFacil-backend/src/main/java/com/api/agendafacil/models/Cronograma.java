@@ -22,10 +22,14 @@ public class Cronograma {
 	@Column(nullable=false, length=200,columnDefinition = "smallint USING tipo_consulta::smallint")
 	private TipoDeConsulta tipoConsulta;
 	
-	
+	//opcional
 	public Cronograma(LocalDateTime dataHora, TipoDeConsulta tipoConsulta) {
 		this.dataHora=dataHora;
 		this.tipoConsulta=tipoConsulta;
+		
+	}
+	
+	public Cronograma() {
 		
 	}
 

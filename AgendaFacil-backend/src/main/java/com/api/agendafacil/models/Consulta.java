@@ -16,10 +16,11 @@ public class Consulta implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID id;
-	@Column(nullable = false, length = 200)
-	private String descricao;
-	@Column(nullable = false)
-	private Boolean retorno;
+	
+	private Usuario usuario;
+	private Agendamento agendamento;
+	private UBS ubs;
+	
 	
 	//getters e setters
 	
@@ -29,18 +30,7 @@ public class Consulta implements Serializable {
 	public void setId(UUID id) {
 		this.id = id;
 	}
-	public String getDescricao() {
-		return descricao;
-	}
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-	public Boolean getRetorno() {
-		return retorno;
-	}
-	public void setRetorno(Boolean retorno) {
-		this.retorno = retorno;
-	}
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

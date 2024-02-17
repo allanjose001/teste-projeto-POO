@@ -4,8 +4,6 @@ import java.time.LocalDate;
 import java.util.Set;
 
 import com.api.agendafacil.enums.TipoUsuario;
-import com.api.agendafacil.models.UsuarioLogin;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -21,7 +19,7 @@ public class UsuarioDto {
 	private String sus;
 	private String telefone;
 	private String email;
-	private UsuarioLogin usuarioLogin;
+	private String senha;
 	private Set<TipoUsuario> roles;
 	
 	
@@ -61,12 +59,11 @@ public class UsuarioDto {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	public UsuarioLogin getUsuarioLogin() {
-		return usuarioLogin;
+	public String getSenha() {
+		return senha;
 	}
-	public void setUsuarioLogin(UsuarioLogin usuarioLogin) {
-		this.usuarioLogin = usuarioLogin;
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 	public Set<TipoUsuario> getRoles() {
 		return roles;

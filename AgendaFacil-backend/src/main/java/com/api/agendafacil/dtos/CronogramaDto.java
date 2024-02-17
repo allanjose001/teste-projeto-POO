@@ -10,6 +10,8 @@ public class CronogramaDto {
 	private LocalDateTime dataHora;
 	@NotNull
 	private String tipoConsulta;
+	
+	
 	public LocalDateTime getDataHora() {
 		return dataHora;
 	}
