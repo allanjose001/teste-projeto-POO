@@ -1,6 +1,6 @@
 package com.api.agendafacil.models;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
@@ -18,13 +18,13 @@ public class Cronograma {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID id;
 	@Column(nullable=false, length=200)
-	private LocalDateTime dataHora;
+	private LocalDate data;
 	@Column(nullable=false, length=200,columnDefinition = "smallint USING tipo_consulta::smallint")
 	private TipoDeConsulta tipoConsulta;
 	
 	//opcional
-	public Cronograma(LocalDateTime dataHora, TipoDeConsulta tipoConsulta) {
-		this.dataHora=dataHora;
+	public Cronograma(LocalDate data, TipoDeConsulta tipoConsulta) {
+		this.data=data;
 		this.tipoConsulta=tipoConsulta;
 		
 	}
@@ -39,11 +39,11 @@ public class Cronograma {
 	public void setId(UUID id) {
 		this.id = id;
 	}
-	public LocalDateTime getDataHora() {
-		return dataHora;
+	public LocalDate getData() {
+		return data;
 	}
-	public void setDataHora(LocalDateTime dataHora) {
-		this.dataHora = dataHora;
+	public void setData(LocalDateTime data) {
+		this.data = data;
 	}
 	public TipoDeConsulta getTipoConsulta() {
 		return tipoConsulta;
