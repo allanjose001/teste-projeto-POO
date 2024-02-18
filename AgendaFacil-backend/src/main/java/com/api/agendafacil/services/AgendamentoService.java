@@ -1,69 +1,54 @@
 package com.api.agendafacil.services;
-import com.api.agendafacil.dtos.AgendamentoDto;
-import com.api.agendafacil.enums.TipoDeConsulta;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import com.api.agendafacil.models.Agendamento;
-import com.api.agendafacil.repositories.RepositorioAgendamento;
+import com.api.agendafacil.models.Usuario;
+import com.api.agendafacil.repositories.RepositorioUsuario;
 
 import jakarta.transaction.Transactional;
 
 @Service
-public class AgendamentoService {
-
+public class UsuarioService implements UsuarioServiceInterface{
+	
 	@Autowired
-	private RepositorioAgendamento repositorioAgendamento;
-	
+	private RepositorioUsuario repositorioUsuario;
+
 	@Transactional
-	public Agendamento save(Agendamento agendamento) {
-		//verificar se tem vagas disponiveis para o tipo do agendamento
-		TipoDeConsulta tipoConsulta=agendamento.getTipoConsulta();
-		if(tipoConsulta!=null && tipoConsulta.getVagasDisponiveis()>0) {
-			//condição aceita, agendamento efetuuado
-			Agendamento novoAgendamento=repositorioAgendamento.save(agendamento);
-			//agora vamos atualizar as vagas disponiveis.
-			tipoConsulta.setVagasDisponiveis(tipoConsulta.getVagasDisponiveis()-1);
-			return novoAgendamento;
-		}else {
-			//! precisa implementar o throw qui em vez de deixar esse Sysout <fazer um tratamento personalizado>
-			System.out.println("não tem vagas disponiveis");
-		}
-		return repositorioAgendamento.save(agendamento);
+	public Usuario saveUsuario(Usuario usuario) {
+		try {
+			// Tenta salvar o usuário no banco de dados
+			return repositorioUsuario.save(usuario);
+	    } catch (DataIntegrityViolationException ex) {
+	        // Captura exceção de violação de integridade (por exemplo, CPF duplicado)
+	        // Lança uma exceção personalizada informando sobre o erro de integridade
+	    	throw new IllegalArgumentException("Erro ao salvar o usuário. Verifique os dados fornecidos.", ex);
+	     }
 	}
-	public List<Agendamento> findAll() {
-		return repositorioAgendamento.findAll();
+	//esse metodo retorna uma lista com todos os ussuarios que estão contidos no meu banco de dados
+	public List<Usuario> getAllUsuario() {
+		return repositorioUsuario.findAll();
 	}
 	
-	public Optional<Agendamento> findById(UUID id) {
-		return repositorioAgendamento.findById(id);
+	//metodo de busca usuario por id 
+	public Optional<Usuario> findUsuarioById(UUID id) {
+		return repositorioUsuario.findById(id);
 	}
-	public Agendamento updateAgendamento(UUID id, AgendamentoDto agendamentoDto) {
-		Optional<Agendamento> agendamentoOptional = findById(id);
-	    if (agendamentoOptional.isPresent()) {
-	       Agendamento agendamento = agendamentoOptional.get();
-	            agendamento.setTipoConsulta(agendamentoDto.getTipoConsulta());
-	            agendamento.setDataConsulta(agendamentoDto.getDataConsulta());
-	            return repositorioAgendamento.save(agendamento);
+
+	 @Transactional
+	 public void deleteUsuario(Usuario usuario) {
+		 // Verifica se o usuário existe antes de tentar excluí-lo
+		 if (repositorioUsuario.existsById(usuario.getId())) {
+	     // Exclui o usuário se existir
+			 repositorioUsuario.delete(usuario);
 	     } else {
-	            // Se o agendamento não for encontrado, você pode lançar uma exceção ou retornar null, dependendo dos requisitos da sua aplicação
-	         return null;
-	        }
-	}
-	
-	//implementei amesma logica do save a diferença é que eu adicionei mais uma vaga
-	@Transactional
-	public void delete(Agendamento agendamento) {
-		TipoDeConsulta tipoConsulta=agendamento.getTipoConsulta();
-		if(tipoConsulta!=null && tipoConsulta.getVagasDisponiveis()>0) {
-			repositorioAgendamento.delete(agendamento);
-			tipoConsulta.setVagasDisponiveis(tipoConsulta.getVagasDisponiveis()+1);
-		}
-		
-	}
-	
+	     // Lança uma exceção se o usuário não existir para exclusão
+	    	 throw new IllegalArgumentException("Usuário não encontrado para exclusão.");
+	     }
+	 }
 }
