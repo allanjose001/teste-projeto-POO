@@ -1,54 +1,89 @@
 package com.api.agendafacil.services;
+import com.api.agendafacil.dtos.AgendamentoDto;
+import com.api.agendafacil.dtos.CronogramaDto;
+import com.api.agendafacil.enums.TipoDeConsulta;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import com.api.agendafacil.models.Usuario;
-import com.api.agendafacil.repositories.RepositorioUsuario;
+import com.api.agendafacil.models.Agendamento;
+import com.api.agendafacil.models.Cronograma;
+import com.api.agendafacil.repositories.RepositorioAgendamento;
 
 import jakarta.transaction.Transactional;
+import com.api.agendafacil.services.CronogramaService;
 
 @Service
-public class UsuarioService implements UsuarioServiceInterface{
+public class AgendamentoService {
+
+	@Autowired
+	private RepositorioAgendamento repositorioAgendamento;
 	
 	@Autowired
-	private RepositorioUsuario repositorioUsuario;
+    private CronogramaService cronogramaService;
 
+	
 	@Transactional
-	public Usuario saveUsuario(Usuario usuario) {
-		try {
-			// Tenta salvar o usuário no banco de dados
-			return repositorioUsuario.save(usuario);
-	    } catch (DataIntegrityViolationException ex) {
-	        // Captura exceção de violação de integridade (por exemplo, CPF duplicado)
-	        // Lança uma exceção personalizada informando sobre o erro de integridade
-	    	throw new IllegalArgumentException("Erro ao salvar o usuário. Verifique os dados fornecidos.", ex);
-	     }
-	}
-	//esse metodo retorna uma lista com todos os ussuarios que estão contidos no meu banco de dados
-	public List<Usuario> getAllUsuario() {
-		return repositorioUsuario.findAll();
+    public Agendamento save(Agendamento agendamento) {
+        TipoDeConsulta tipoConsulta = agendamento.getTipoConsulta();
+        LocalDate dataDesejada = agendamento.getDataConsulta();
+
+        List<Cronograma> eventos = cronogramaService.listarEventos();
+        boolean tipoEDataDisponivel = eventos.stream()
+                .anyMatch(evento -> evento.getTipoConsulta().equals(tipoConsulta) && evento.getData().equals(dataDesejada));
+
+        if (tipoEDataDisponivel) {
+            if (tipoConsulta != null && tipoConsulta.getVagasDisponiveis() > 0) {
+                // Condição aceita, agendamento efetuado
+                Agendamento novoAgendamento = repositorioAgendamento.save(agendamento);
+                // Agora vamos atualizar as vagas disponíveis.
+                tipoConsulta.setVagasDisponiveis(tipoConsulta.getVagasDisponiveis() - 1);
+                return novoAgendamento;
+            } else {
+                // Tratamento para quando não houver vagas disponíveis
+                throw new RuntimeException("Não há vagas disponíveis para o tipo de consulta selecionado.");
+            }
+        } else {
+            // Tratamento para quando o tipo de consulta não estiver disponível na data desejada
+            throw new RuntimeException("O tipo de consulta selecionado não está disponível na data desejada.");
+        }
+    }
+
+    // Outros métodos do serviço
+	public List<Agendamento> findAll() {
+		return repositorioAgendamento.findAll();
 	}
 	
-	//metodo de busca usuario por id 
-	public Optional<Usuario> findUsuarioById(UUID id) {
-		return repositorioUsuario.findById(id);
+	public Optional<Agendamento> findById(UUID id) {
+		return repositorioAgendamento.findById(id);
 	}
-
-	 @Transactional
-	 public void deleteUsuario(Usuario usuario) {
-		 // Verifica se o usuário existe antes de tentar excluí-lo
-		 if (repositorioUsuario.existsById(usuario.getId())) {
-	     // Exclui o usuário se existir
-			 repositorioUsuario.delete(usuario);
+	public Agendamento updateAgendamento(UUID id, AgendamentoDto agendamentoDto) {
+		Optional<Agendamento> agendamentoOptional = findById(id);
+	    if (agendamentoOptional.isPresent()) {
+	       Agendamento agendamento = agendamentoOptional.get();
+	            agendamento.setTipoConsulta(agendamentoDto.getTipoConsulta());
+	            agendamento.setDataConsulta(agendamentoDto.getDataConsulta());
+	            return repositorioAgendamento.save(agendamento);
 	     } else {
-	     // Lança uma exceção se o usuário não existir para exclusão
-	    	 throw new IllegalArgumentException("Usuário não encontrado para exclusão.");
-	     }
-	 }
+	            // Se o agendamento não for encontrado, você pode lançar uma exceção ou retornar null, dependendo dos requisitos da sua aplicação
+	         return null;
+	        }
+	}
+	
+	//implementei amesma logica do save a diferença é que eu adicionei mais uma vaga
+	@Transactional
+	public void delete(Agendamento agendamento) {
+		TipoDeConsulta tipoConsulta=agendamento.getTipoConsulta();
+		if(tipoConsulta!=null && tipoConsulta.getVagasDisponiveis()>0) {
+			repositorioAgendamento.delete(agendamento);
+			tipoConsulta.setVagasDisponiveis(tipoConsulta.getVagasDisponiveis()+1);
+		}
+		
+	}
+	
 }
