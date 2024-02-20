@@ -9,23 +9,38 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Transient;
 
 import com.api.agendafacil.enums.TipoDeConsulta;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Cronograma implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID id;
+	
+	@OneToOne
+	@JoinColumn (name="ubs_id", nullable=false)
+	@JsonIgnore
+	private UBS ubs;
+	
+
 	@Column(nullable=false, length=200)
 	private LocalDate data;
 	@Column(nullable=false, length=200)
 	private TipoDeConsulta tipoConsulta;
 	
-	//opcional
+	@Transient
+	private String nomeUBSTransient;
+	
 	public Cronograma(LocalDate data, TipoDeConsulta tipoConsulta) {
 		this.data=data;
 		this.tipoConsulta=tipoConsulta;
@@ -35,7 +50,22 @@ public class Cronograma implements Serializable{
 	public Cronograma() {
 		
 	}
-
+	
+	//getter transient
+	public String getNomeUBSTransient() {
+		return ubs != null ? ubs.getNomeUBS() : null;
+	}
+	
+	//getter e setters
+	
+	public UBS getUbs() {
+		return ubs;
+	}
+	
+	public void setUbs(UBS ubs) {
+		this.ubs = ubs;
+	}
+	
 	public UUID getId() {
 		return id;
 	}
