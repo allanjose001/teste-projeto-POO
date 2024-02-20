@@ -1,22 +1,19 @@
 package com.api.agendafacil.dtos;
 
-import java.time.LocalDateTime;
-
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 public class CronogramaDto {
-	@NotBlank
-	private LocalDateTime dataHora;
-	@NotNull
+
+	private LocalDate data;
 	private String tipoConsulta;
 	
+	//getters e setters
 	
-	public LocalDateTime getDataHora() {
-		return dataHora;
+	public LocalDate getData() {
+		return data;
 	}
-	public void setDataHora(LocalDateTime dataHora) {
-		this.dataHora = dataHora;
+	public void setData(LocalDate data) {
+		this.data = data;
 	}
 	public String getTipoConsulta() {
 		return tipoConsulta;
@@ -24,7 +21,4 @@ public class CronogramaDto {
 	public void setTipoConsulta(String tipoConsulta) {
 		this.tipoConsulta = tipoConsulta;
 	}
-	
-	
-	
 }

@@ -7,5 +7,6 @@ import java.util.UUID;
 
 @Repository
 public interface RepositorioCronograma extends JpaRepository<Cronograma, UUID> {
+	
 }
 

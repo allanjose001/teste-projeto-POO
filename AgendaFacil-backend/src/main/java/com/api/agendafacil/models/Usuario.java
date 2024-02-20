@@ -3,6 +3,7 @@ package com.api.agendafacil.models;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -19,13 +20,14 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Usuario implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@Column(name = "usuario_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID id;
 	@Column(nullable = false, length = 200)
@@ -41,6 +43,8 @@ public class Usuario implements Serializable{
 	@Column(nullable = false, length = 200)
 	private String email;
 	private String senha;
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+	private List<Agendamento> agendamento;
 	
 	@ElementCollection(targetClass = TipoUsuario.class, fetch = FetchType.EAGER)
 	@CollectionTable(name = "usuario_roles")
@@ -121,6 +125,15 @@ public class Usuario implements Serializable{
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+
+	public List<Agendamento> getAgendamento() {
+		return agendamento;
+	}
+
+	public void setAgendamento(List<Agendamento> agendamento) {
+		this.agendamento = agendamento;
+	}
+
 	public Set<TipoUsuario> getRoles() {
 		return roles;
 	}

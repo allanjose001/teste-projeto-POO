@@ -44,7 +44,7 @@ public class UBSController {
 		ubs.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
 		return ResponseEntity.status(HttpStatus.CREATED).body(facade.saveUBS(ubs));
 	}
-	
+
 	@GetMapping
 	public ResponseEntity<List<UBS>> getTodasUBS(){
 		return ResponseEntity.status(HttpStatus.OK).body(facade.getAllUBS());
