@@ -22,7 +22,11 @@ import com.api.agendafacil.dtos.UsuarioDto;
 import com.api.agendafacil.facade.Facade;
 import com.api.agendafacil.models.Usuario;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -32,21 +36,39 @@ public class UsuarioController {
 	
 	@Autowired
 	private Facade facade;
-	
+     
 	@PostMapping
-	public ResponseEntity<Object> saveUsuario(@RequestBody @Valid UsuarioDto usuarioDto) {				
+	@Operation(summary = "Salvar um usuário", description = "Este endpoint salva um novo usuário.")
+    @ApiResponses(value = {
+    		@ApiResponse(responseCode = "201", description = "Usuário criado com sucesso"),
+    		@ApiResponse(responseCode = "400", description = "Requisição inválida")
+    })
+	public ResponseEntity<Object> saveUsuario( @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Objeto UsuarioDto contendo os detalhes do novo usuário", required = true)@RequestBody @Valid UsuarioDto usuarioDto) {				
 		var usuario = new Usuario();
 		BeanUtils.copyProperties(usuarioDto, usuario);
 		return ResponseEntity.status(HttpStatus.CREATED).body(facade.saveUsuario(usuario));
 	}
 	
 	@GetMapping
+	@Operation(summary = "Listar todos os usuários", description = "Este endpoint retorna uma lista de todos os usuários cadastrados.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Lista de usuários retornada com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Nenhum usuário encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
 	public ResponseEntity<List<Usuario>> getTodosUsuarios(){
 		return ResponseEntity.status(HttpStatus.OK).body(facade.getAllUsuario());
 	}
 	
+	
 	@GetMapping("/{id}")
-	public ResponseEntity<Object> getUmUsuario(@PathVariable(value = "id") UUID id){
+    @Operation(summary = "Buscar um usuário pelo ID", description = "Este endpoint retorna um usuário com base no ID fornecido.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Usuário encontrado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Usuário não encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
+	public ResponseEntity<Object> getUmUsuario(@Parameter(description = "ID do usuário", required = true) @PathVariable(value = "id")  UUID id){
 		Optional<Usuario> usuarioOptional = facade.findUsuarioById(id);
 		if (!usuarioOptional.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Paciente não encontrado");
@@ -55,7 +77,14 @@ public class UsuarioController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Object> deleteUsuario(@PathVariable(value = "id") UUID id){
+    @Operation(summary = "Remover um usuário pelo ID", description = "Este endpoint remove um usuário com base no ID fornecido.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Usuário removido com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Usuário não encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
+	public ResponseEntity<Object> deleteUsuario( @Parameter(description = "ID do usuário a ser removido", required = true)
+    @PathVariable(value = "id") UUID id){
 		Optional<Usuario> usuarioOptional = facade.findUsuarioById(id);
 		if (!usuarioOptional.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario não encontrado");
@@ -65,7 +94,16 @@ public class UsuarioController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Object> updateUsuario(@PathVariable(value = "id") UUID id, @RequestBody @Valid UsuarioDto usuarioDto){
+    @Operation(summary = "Atualizar um usuário pelo ID", description = "Este endpoint atualiza um usuário existente com base no ID fornecido.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Usuário atualizado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Usuário não encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
+	public ResponseEntity<Object> updateUsuario( @Parameter(description = "ID do usuário a ser atualizado", required = true)
+    @PathVariable(value = "id") UUID id,
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Objeto UsuarioDto contendo os detalhes atualizados do usuário", required = true)
+    @RequestBody @Valid UsuarioDto usuarioDto){
 		Optional<Usuario> usuarioOptional = facade.findUsuarioById(id);
 		if (!usuarioOptional.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario não encontrado");
