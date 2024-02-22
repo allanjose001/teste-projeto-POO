@@ -75,3 +75,4 @@ public class EnderecoController {
 		return ResponseEntity.status(HttpStatus.OK).body(facade.saveEndereco(endereco));
 	}	
 }
+
