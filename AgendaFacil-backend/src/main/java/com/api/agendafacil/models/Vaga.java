@@ -1,7 +1,8 @@
 package com.api.agendafacil.models;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+
 import java.util.UUID;
 
 import jakarta.persistence.Column;
@@ -18,7 +19,7 @@ public class Vaga implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID id;
 	@Column(nullable = false, length = 200)
-	private LocalDateTime dataHorario;
+	private LocalDate data;
 	
 	//getters e setters
 	
@@ -28,15 +29,14 @@ public class Vaga implements Serializable {
 	public void setId(UUID id) {
 		this.id = id;
 	}
-	public LocalDateTime getDataHorario() {
-		return dataHorario;
+	public LocalDate getData() {
+		return data;
 	}
-	public void setDataHorario(LocalDateTime dataHorario) {
-		this.dataHorario = dataHorario;
+	public void setData(LocalDate data) {
+		this.data = data;
 	}
 	public static long getSerialversionuid() {
 		return SerialVersionUID;
 	}
-	
-
 }
+
