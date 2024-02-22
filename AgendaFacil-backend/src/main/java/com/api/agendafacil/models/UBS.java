@@ -36,10 +36,10 @@ public class UBS implements Serializable{
 	private LocalDateTime registrationDate;
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Endereco endereco;
-	@OneToOne(mappedBy = "ubs", cascade = CascadeType.ALL, orphanRemoval = true)
-	private Cronograma cronograma;
-	@OneToMany(mappedBy = "ubs", cascade = CascadeType.ALL)
-	private List<Agendamento> agendamento;
+	@OneToMany(mappedBy = "ubs", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Cronograma> cronograma;
+    @OneToMany(mappedBy = "ubs", cascade = CascadeType.ALL)
+    private List<Agendamento> agendamento;
 	
 	
 	//getters e setters
@@ -76,21 +76,21 @@ public class UBS implements Serializable{
 		this.endereco = endereco;
 	}
 	
-	
-	public Cronograma getCronograma() {
-		return cronograma;
-	}
-	public void setCronograma(Cronograma cronograma) {
-		this.cronograma = cronograma;
-	}
-	public List<Agendamento> getAgendamento() {
-		return agendamento;
-	}
 	public void setAgendamento(List<Agendamento> agendamento) {
 		this.agendamento = agendamento;
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	public List<Cronograma> getCronograma() {
+		return cronograma;
+	}
+	public void setCronograma(List<Cronograma> cronograma) {
+		this.cronograma = cronograma;
+	}
+	public List<Agendamento> getAgendamento() {
+		return agendamento;
+	}
 	
 }
+
