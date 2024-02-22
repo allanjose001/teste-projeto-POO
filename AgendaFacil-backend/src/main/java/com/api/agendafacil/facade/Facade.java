@@ -13,10 +13,8 @@ import com.api.agendafacil.enums.TipoDeConsulta;
 import com.api.agendafacil.models.Agendamento;
 import com.api.agendafacil.models.Cronograma;
 import com.api.agendafacil.models.Endereco;
-import com.api.agendafacil.models.TipoConsulta;
 import com.api.agendafacil.models.UBS;
 import com.api.agendafacil.models.Usuario;
-import com.api.agendafacil.repositories.RepositorioAgendamento;
 import com.api.agendafacil.services.AgendamentoService;
 import com.api.agendafacil.services.AuthUsuarioService;
 import com.api.agendafacil.services.CronogramaService;
@@ -82,32 +80,29 @@ public class Facade {
 	@Autowired
 	private AgendamentoService agendamentoService;
 	
-	@Autowired
-	private RepositorioAgendamento repositorioAgendamento;
-	
-	/*
-	public Agendamento saveAgendamento(Agendamento agendamento) {
-		return agendamentoService.saveAgendamento(agendamento);
-	}
-	*/
 	public Agendamento saveAgendamento(Agendamento agendamento) {
 		TipoDeConsulta tipoConsulta = agendamento.getTipoConsulta();
 		LocalDate dataDesejada = agendamento.getDataConsulta();
+		//instancia os tipos necessarios para fazer as operações
+		UBS ubs = agendamento.getUbs();
+		//acessa a UBS pelo Id que está dentro de Agendamento
+		System.out.println("vagas disponiveis: "+ tipoConsulta.getVagasDisponiveis());
 		
-		System.out.println("vagas disponiveis: "+ TipoDeConsulta.MEDICO.getVagasDisponiveis());
+		List<Cronograma> cronogramas = cronogramaService.listarCronogramaPorUBS(ubs);
+		//lista somente a UBS desejada
+		boolean tipoEDataDisponivel = cronogramas.stream()
+				.anyMatch(cronograma -> cronograma.getDiasSemana().contains(dataDesejada.getDayOfWeek().toString())
+						&& cronograma.getTiposConsulta().contains(tipoConsulta));
+				//verifica se o tipo de consulta é atendido naquele dia da semana
 		
-		List<Cronograma> eventos = cronogramaService.listarEventos();		
-		boolean tipoEDataDisponivel = eventos.stream()
-				.anyMatch(evento -> evento.getTipoConsulta().equals(tipoConsulta) && evento.getData().equals(dataDesejada));
-				//verifica se o tipo de consulta é atendido naquele dia
 		if (tipoEDataDisponivel) {
 			if (tipoConsulta != null && tipoConsulta.getVagasDisponiveis() > 0) {
-				//verifica se tem vagas disponiveis
-				
 				tipoConsulta.setVagasDisponiveis(tipoConsulta.getVagasDisponiveis() - 1);
-				
-				Agendamento novoAgendamento = repositorioAgendamento.save(agendamento);
-				System.out.println("vagas disponiveis, depois de salvar: "+ TipoDeConsulta.MEDICO.getVagasDisponiveis());
+				//verifica se tem vagas disponiveis e tira 1 vaga
+			
+				Agendamento novoAgendamento = agendamentoService.saveAgendamento(agendamento);
+	
+				System.out.println("vagas disponiveis, depois de salvar: "+ tipoConsulta.getVagasDisponiveis());
 				return novoAgendamento;
 			} else {
 				throw new RuntimeException("neste dia não há mais vagas disponiveis para esta consulta");
@@ -139,16 +134,24 @@ public class Facade {
 	@Autowired
 	private CronogramaService cronogramaService;
 	
-	public void adicionarEvento(Cronograma cronograma) {
-		cronogramaService.adicionarEvento(cronograma);
+	public Cronograma adicionarCronograma(Cronograma cronograma) {
+		return cronogramaService.adicionarCronograma(cronograma);
 	}
 	
-	public List<Cronograma> listarEventos() {
-		return cronogramaService.listarEventos();
+	public Optional<Cronograma> listarCronogramaPorId(UUID id) {
+		return cronogramaService.listarCronogramaPorId(id);
 	}
 	
-	public void atualizarEvento(UUID id, Cronograma novoCronograma) {
-		cronogramaService.atualizarEvento(id, novoCronograma);
+	public List<Cronograma> listarCronograma() {
+		return cronogramaService.listarCronograma();
+	}
+	
+	public Cronograma atualizarCronograma(UUID id, Cronograma novoCronograma) {
+		return cronogramaService.atualizarCronograma(id, novoCronograma);
+	}
+	
+	public void deleteCronograma(Cronograma cronograma) {
+		cronogramaService.deleteCronograma(cronograma);
 	}
 	
 	//Usuario--------------------------------------------------------------------------------------
@@ -178,16 +181,5 @@ public class Facade {
 	public Usuario autenticarUsuario(String nome, String senha) {
 		return authUsuarioService.autenticarUsuario(nome,senha);
 	}
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }
