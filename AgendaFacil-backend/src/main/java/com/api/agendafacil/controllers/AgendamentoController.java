@@ -22,7 +22,11 @@ import com.api.agendafacil.dtos.AgendamentoDto;
 import com.api.agendafacil.facade.Facade;
 import com.api.agendafacil.models.Agendamento;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
+import io.swagger.v3.oas.annotations.responses.ApiResponse; 
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -32,20 +36,40 @@ public class AgendamentoController {
 	@Autowired
 	private Facade facade;
 	
-	@PostMapping
-	public ResponseEntity<Object> saveAgendamento(@RequestBody @Valid AgendamentoDto agendamentoDto) {				
+	@PostMapping("/agendamento")
+    @Operation(summary = "Salva um agendamento", description = "Este endpoint salva um novo agendamento.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description = "Agendamento criado com sucesso",
+        		content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json")),
+        @ApiResponse(responseCode = "400", description = "Requisição inválida")
+    })
+	public ResponseEntity<Object> saveAgendamento( @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Objeto AgendamentoDto contendo os detalhes do novo agendamento", required = true) @RequestBody @Valid AgendamentoDto agendamentoDto) {				
 		var agendamento = new Agendamento();
 		BeanUtils.copyProperties(agendamentoDto, agendamento);
 		return ResponseEntity.status(HttpStatus.CREATED).body(facade.saveAgendamento(agendamento));
 	}
 	 
 	@GetMapping
+	@Operation(summary = "Listar todos os agendamentos", description = "Este endpoint retorna uma lista de todos os agendamentos cadastrados.")
+	@ApiResponses(value = {
+	    @ApiResponse(responseCode = "200", description = "Lista de agendamentos retornada com sucesso", 
+	    		content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json")),
+	    @ApiResponse(responseCode = "404", description = "Nenhum agendamento encontrado"),
+	    @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+	})
 	public ResponseEntity<List<Agendamento>> getTodosAgendamentos(){
 		return ResponseEntity.status(HttpStatus.OK).body(facade.getAllAgendamento());
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Object> getUmAgendamento(@PathVariable(value = "id") UUID id){
+	@Operation(summary = "Buscar um agendamento pelo ID", description = "Este endpoint retorna um agendamento com base no ID fornecido.")
+	@ApiResponses(value = {
+	    @ApiResponse(responseCode = "200", description = "Agendamento encontrado com sucesso", 
+	    		content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json")),
+	    @ApiResponse(responseCode = "404", description = "Agendamento não encontrado"),
+	    @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+	})
+	public ResponseEntity<Object> getUmAgendamento(  @Parameter(description = "ID do agendamento", required = true) @PathVariable(value = "id") UUID id){
 		Optional<Agendamento> agendamentoOptional = facade.findAgendamentoById(id);
 		if (!agendamentoOptional.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Agendamento não encontrado");
@@ -54,7 +78,14 @@ public class AgendamentoController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Object> deleteAgendamento(@PathVariable(value = "id") UUID id){
+	@Operation(summary = "Remover um agendamento pelo ID", description = "Este endpoint remove um agendamento com base no ID fornecido.")
+	@ApiResponses(value = {
+	    @ApiResponse(responseCode = "200", description = "Agendamento removido com sucesso",
+	    		content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json")),
+	    @ApiResponse(responseCode = "404", description = "Agendamento não encontrado"),
+	    @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+	})
+	public ResponseEntity<Object> deleteAgendamento(  @Parameter(description = "ID do agendamento a ser removido", required = true) @PathVariable(value = "id") UUID id){
 		Optional<Agendamento> agendamentoOptional = facade.findAgendamentoById(id);
 		if (!agendamentoOptional.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Agendamento não encontrado");
@@ -63,8 +94,16 @@ public class AgendamentoController {
 		return ResponseEntity.status(HttpStatus.OK).body("Agendamento removido com sucesso");
 	}
 	
+	
 	@PutMapping("/{id}")
-	public ResponseEntity<Object> updateAgendamento(@PathVariable(value = "id") UUID id, @RequestBody @Valid AgendamentoDto agendamentoDto){
+	@Operation(summary = "Atualizar um agendamento pelo ID", description = "Este endpoint atualiza um agendamento existente com base no ID fornecido.")
+	@ApiResponses(value = {
+	    @ApiResponse(responseCode = "200", description = "Agendamento atualizado com sucesso",
+	    		content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json")),
+	    @ApiResponse(responseCode = "404", description = "Agendamento não encontrado"),
+	    @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+	})
+	public ResponseEntity<Object> updateAgendamento(  @Parameter(description = "ID do agendamento a ser atualizado", required = true) @PathVariable(value = "id") UUID id, @RequestBody @Valid AgendamentoDto agendamentoDto){
 		Optional<Agendamento> agendamentoOptional = facade.findAgendamentoById(id);
 		if (!agendamentoOptional.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Agendamento não encontrado");
