@@ -1,5 +1,6 @@
 package com.api.agendafacil.controllers;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,17 +14,31 @@ import com.api.agendafacil.facade.Facade;
 import com.api.agendafacil.models.AuthRequest;
 import com.api.agendafacil.models.Usuario;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+/**
+ * Controlador para autenticação de usuários.
+ */
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/auth")
+
 
 public class AuthUsuarioController {
 	
 	@Autowired
 	private Facade facade;
-	
+
 	@PostMapping("/login")
-    public ResponseEntity<Object> autenticarUsuario(@RequestBody AuthRequest Data) {
+    @Operation(summary = "Autenticação de Usuário", description = "Autentica um usuário com o nome de usuário e senha fornecidos.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description = "Usuário autenticado com sucesso.", content = @Content(schema = @Schema(implementation = ResponseEntity.class))),
+        @ApiResponse(responseCode = "400", description = "Autenticação falhou. Nome de usuário ou senha inválidos.")
+    })
+    public ResponseEntity<Object> autenticarUsuario( @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Objeto AuthRequest contendo nome de usuário e senha.", required = true) AuthRequest Data) {
         String nome = Data.getNome();
         String senha = Data.getSenha();
         
@@ -38,3 +53,4 @@ public class AuthUsuarioController {
         }
     }
 }
+
