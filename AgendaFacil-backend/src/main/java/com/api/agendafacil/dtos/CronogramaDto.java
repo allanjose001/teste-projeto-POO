@@ -1,36 +1,44 @@
 package com.api.agendafacil.dtos;
 
-import java.time.LocalDate;
+import java.util.List;
 
+import com.api.agendafacil.enums.TipoDeConsulta;
 import com.api.agendafacil.models.UBS;
 
 public class CronogramaDto {
 
 	private UBS ubs;
-	private LocalDate data;
-	private String tipoConsulta;	
+	private List<String> diasSemana;
+	private List<TipoDeConsulta> tiposConsulta;
+	private List<Integer> vagas;
 	private String nomeUBSTransient;
-	
 	
 	//getters e setters
 	
-	public LocalDate getData() {
-		return data;
-	}
+
 	public UBS getUbs() {
 		return ubs;
 	}
 	public void setUbs(UBS ubs) {
 		this.ubs = ubs;
 	}
-	public void setData(LocalDate data) {
-		this.data = data;
+	public List<String> getDiasSemana() {
+		return diasSemana;
 	}
-	public String getTipoConsulta() {
-		return tipoConsulta;
+	public void setDiasSemana(List<String> diasSemana) {
+		this.diasSemana = diasSemana;
 	}
-	public void setTipoConsulta(String tipoConsulta) {
-		this.tipoConsulta = tipoConsulta;
+	public List<TipoDeConsulta> getTiposConsulta() {
+		return tiposConsulta;
+	}
+	public void setTiposConsulta(List<TipoDeConsulta> tiposConsulta) {
+		this.tiposConsulta = tiposConsulta;
+	}
+	public List<Integer> getVagas() {
+		return vagas;
+	}
+	public void setVagas(List<Integer> vagas) {
+		this.vagas = vagas;
 	}
 	public String getNomeUBSTransient() {
 		return nomeUBSTransient;
