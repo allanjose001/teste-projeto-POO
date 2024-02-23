@@ -38,7 +38,7 @@ public class AgendamentoController {
 	@Autowired
 	private Facade facade;
 	
-	@PostMapping("/agendamento")
+	@PostMapping
     @Operation(summary = "Salva um agendamento", description = "Este endpoint salva um novo agendamento.")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "201", description = "Agendamento criado com sucesso",

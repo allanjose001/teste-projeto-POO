@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.api.agendafacil.models.Endereco;
-import com.api.agendafacil.models.UBS;
 import com.api.agendafacil.repositories.RepositorioEndereco;
-import com.api.agendafacil.repositories.RepositorioUBS;
 
 import jakarta.transaction.Transactional;
 

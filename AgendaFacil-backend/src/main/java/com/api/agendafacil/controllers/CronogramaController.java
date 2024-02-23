@@ -34,7 +34,7 @@ public class CronogramaController {
 	@Autowired
     private Facade facade;
 
-	@PostMapping("/login")
+	@PostMapping
     @Operation(summary = "Salvar Cronograma", description = "esse endpoint Salva cronograma .")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "201", description = "Usuário autenticado com sucesso."),

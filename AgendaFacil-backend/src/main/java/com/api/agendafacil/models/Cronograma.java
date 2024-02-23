@@ -121,8 +121,4 @@ public class Cronograma implements Serializable{
 		return serialVersionUID;
 	}
 
-	public void setNomeUBSTransient(String nomeUBSTransient) {
-		this.nomeUBSTransient = nomeUBSTransient;
-	}
-	
 }

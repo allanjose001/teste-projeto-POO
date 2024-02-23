@@ -41,7 +41,6 @@ public class UBS implements Serializable{
     @OneToMany(mappedBy = "ubs", cascade = CascadeType.ALL)
     private List<Agendamento> agendamento;
 	
-	
 	//getters e setters
 	
 	public UUID getId() {
@@ -75,12 +74,11 @@ public class UBS implements Serializable{
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-	
+	public List<Agendamento> getAgendamento() {
+		return agendamento;
+	}
 	public void setAgendamento(List<Agendamento> agendamento) {
 		this.agendamento = agendamento;
-	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 	public List<Cronograma> getCronograma() {
 		return cronograma;
@@ -88,10 +86,7 @@ public class UBS implements Serializable{
 	public void setCronograma(List<Cronograma> cronograma) {
 		this.cronograma = cronograma;
 	}
-	public List<Agendamento> getAgendamento() {
-		return agendamento;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
-	
-	
-	
 }
