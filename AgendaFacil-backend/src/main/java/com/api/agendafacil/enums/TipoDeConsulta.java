@@ -3,7 +3,7 @@ package com.api.agendafacil.enums;
 public enum TipoDeConsulta {
 	MEDICO(1),
 	ENFERMEIRO(1),
-	DENTISTA(1);
+	DENTISTA(1),
 	PEDIATRA(1);
 
 	// Criação de um construtor para me dar acesso a quantidade de vagas que tenho disponiveis

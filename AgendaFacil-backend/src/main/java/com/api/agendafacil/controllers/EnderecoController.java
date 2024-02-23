@@ -22,17 +22,30 @@ import com.api.agendafacil.dtos.EnderecoDto;
 import com.api.agendafacil.facade.Facade;
 import com.api.agendafacil.models.Endereco;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/endereco")
+
+@Tag(name = "Endereço", description = "API para manipulação de Endereço")
 public class EnderecoController {
 
 	@Autowired
 	private Facade facade;
 	
 	@PostMapping
+    @Operation(summary = "Salvar Endereço", description = "esse endpoint Salva endereço .")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description = "Usuário autenticado com sucesso."),
+        @ApiResponse(responseCode = "400", description = "Autenticação falhou. Nome de usuário ou senha inválidos."),
+        @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+       
+    })
 	public ResponseEntity<Object> saveEndereco(@RequestBody @Valid EnderecoDto enderecoDto) {		
 		var endereco = new Endereco();
 		BeanUtils.copyProperties(enderecoDto, endereco);
@@ -40,11 +53,23 @@ public class EnderecoController {
 	}
 	
 	@GetMapping
+	@Operation(summary = "Obter Todos os Endereços", description = "Essse endpoint Retorna todos os endereços cadastrados.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Lista de endereços retornada com sucesso."),
+        @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+       
+    })
 	public ResponseEntity<List<Endereco>> getTodosEnderecos(){
 		return ResponseEntity.status(HttpStatus.OK).body(facade.getAllEndereco());
 	}
 	
 	@GetMapping("/{id}")
+	@Operation(summary = "Obter um Endereço", description = "esse endpoint Retorna um endereço com base no ID fornecido.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Endereço encontrado e retornado com sucesso."),
+        @ApiResponse(responseCode = "404", description= "Endereço não encontrado."),
+        @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
 	public ResponseEntity<Object> getUmEndereco(@PathVariable(value = "id") UUID id){
 		Optional<Endereco> enderecoOptional = facade.findEnderecoById(id);
 		if (!enderecoOptional.isPresent()) {
@@ -54,6 +79,12 @@ public class EnderecoController {
 	}
 	
 	@DeleteMapping("/{id}")
+	@Operation(summary = "Excluir Endereço", description = "Esse endpoint Exclui um endereço com base no ID fornecido.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Endereço excluído com sucesso."),
+        @ApiResponse(responseCode = "404", description = "Endereço não encontrado."),
+        @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
 	public ResponseEntity<Object> deleteEndereco(@PathVariable(value = "id") UUID id){
 		Optional<Endereco> enderecoOptional = facade.findEnderecoById(id);
 		if (!enderecoOptional.isPresent()) {
@@ -64,6 +95,12 @@ public class EnderecoController {
 	}
 	
 	@PutMapping("/{id}")
+    @Operation(summary = "Atualizar Endereço", description = "Esse endpoint Atualiza um endereço com base no ID fornecido.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Endereço atualizado com sucesso."),
+        @ApiResponse(responseCode = "404", description = "Endereço não encontrado."),
+        @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
 	public ResponseEntity<Object> updateEndereco(@PathVariable(value = "id") UUID id, @RequestBody @Valid EnderecoDto enderecoDto){
 		Optional<Endereco> enderecoOptional = facade.findEnderecoById(id);
 		if (!enderecoOptional.isPresent()) {
@@ -75,4 +112,3 @@ public class EnderecoController {
 		return ResponseEntity.status(HttpStatus.OK).body(facade.saveEndereco(endereco));
 	}	
 }
-

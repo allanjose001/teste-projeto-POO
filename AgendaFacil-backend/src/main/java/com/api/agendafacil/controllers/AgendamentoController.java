@@ -25,12 +25,14 @@ import com.api.agendafacil.models.Agendamento;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import io.swagger.v3.oas.annotations.responses.ApiResponse; 
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/agendamento")
+@Tag(name = "Agendamento", description = "API para manipulação de Agendamento")
 public class AgendamentoController {
 
 	@Autowired

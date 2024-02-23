@@ -17,6 +17,7 @@ import com.api.agendafacil.models.Usuario;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 /**
@@ -26,14 +27,14 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/auth")
 
-
+@Tag(name = "Autentição", description = "API para autenticar o usuário no sistema.")
 public class AuthUsuarioController {
 	
 	@Autowired
 	private Facade facade;
 
 	@PostMapping("/login")
-    @Operation(summary = "Autenticação de Usuário", description = "Autentica um usuário com o nome de usuário e senha fornecidos.")
+    @Operation(summary = "Autenticação de Usuário", description = "Esse endpoint Autentica um usuário com o nome de usuário e senha fornecidos.")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "201", description = "Usuário autenticado com sucesso.", content = @Content(schema = @Schema(implementation = ResponseEntity.class))),
         @ApiResponse(responseCode = "400", description = "Autenticação falhou. Nome de usuário ou senha inválidos.")
@@ -53,4 +54,3 @@ public class AuthUsuarioController {
         }
     }
 }
-

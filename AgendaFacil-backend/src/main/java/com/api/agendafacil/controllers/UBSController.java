@@ -27,17 +27,29 @@ import com.api.agendafacil.dtos.UBSDto;
 import com.api.agendafacil.facade.Facade;
 import com.api.agendafacil.models.UBS;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/agenda-facil")
+@Tag(name = "UBS", description = "API para manipulação de Endereço")
 public class UBSController {
 
 	@Autowired
 	private Facade facade;;
-	
+
 	@PostMapping
+		@Operation(summary = "Salvar UBS", description = "Esse endpoint Cria uma nova UBS (Unidade Básica de Saúde).")
+	    @ApiResponses(value = {
+	        @ApiResponse(responseCode = "201", description = "UBS criada com sucesso."),
+	        @ApiResponse(responseCode = "400", description = "Erro de validação."),
+	        @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+	    })
 	public ResponseEntity<Object> saveUBS(@RequestBody @Valid UBSDto ubsDto) {		
 		var ubs = new UBS();
 		BeanUtils.copyProperties(ubsDto, ubs);
@@ -46,11 +58,22 @@ public class UBSController {
 	}
 
 	@GetMapping
+	 @Operation(summary = "Obter Todas as UBS", description = "Esse endpoint Retorna todas as Unidades Básicas de Saúde cadastradas.")
+     @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Lista de UBS retornada com sucesso."),
+        @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
 	public ResponseEntity<List<UBS>> getTodasUBS(){
 		return ResponseEntity.status(HttpStatus.OK).body(facade.getAllUBS());
 	}
 	
 	@GetMapping("/{id}")
+	 @Operation(summary = "Obter uma UBS", description = "Esse endpoint Retorna uma Unidade Básica de Saúde com base no ID fornecido.")
+     @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "UBS encontrada e retornada com sucesso."),
+        @ApiResponse(responseCode = "404", description = "UBS não encontrada."),
+        @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
 	public ResponseEntity<Object> getUmaUBS(@PathVariable(value = "id") UUID id){
 		Optional<UBS> ubsOptional = facade.findUBSById(id);
 		if (!ubsOptional.isPresent()) {
@@ -60,6 +83,12 @@ public class UBSController {
 	}
 	
 	@DeleteMapping("/{id}")
+	 @Operation(summary = "Excluir UBS", description = "Esse endpoint Exclui uma Unidade Básica de Saúde com base no ID fornecido.")
+     @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "UBS removida com sucesso."),
+        @ApiResponse(responseCode = "404", description = "UBS não encontrada."),
+        @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
 	public ResponseEntity<Object> deleteUBS(@PathVariable(value = "id") UUID id){
 		Optional<UBS> ubsOptional = facade.findUBSById(id);
 		if (!ubsOptional.isPresent()) {
@@ -70,6 +99,12 @@ public class UBSController {
 	}
 	
 	@PutMapping("/{id}")
+    @Operation(summary = "Atualizar UBS", description = "Esse endpoint Atualiza uma Unidade Básica de Saúde com base no ID fornecido.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "UBS atualizada com sucesso."),
+        @ApiResponse(responseCode = "404", description = "UBS não encontrada."),
+        @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
 	public ResponseEntity<Object> updateUBS(@PathVariable(value = "id") UUID id, @RequestBody @Valid UBSDto ubsDto){
 		Optional<UBS> ubsOptional = facade.findUBSById(id);
 		if (!ubsOptional.isPresent()) {

@@ -10,34 +10,68 @@ import com.api.agendafacil.dtos.CronogramaDto;
 import com.api.agendafacil.facade.Facade;
 import com.api.agendafacil.models.Cronograma;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/cronograma")
+
+@Tag(name = "Cronogramas", description = "API para manipulação de cronogramas")
 public class CronogramaController {
 	
 	@Autowired
     private Facade facade;
 
-	@PostMapping
-	public ResponseEntity<Object> saveCronograma(@RequestBody @Valid CronogramaDto cronogramaDto) {				
+	@PostMapping("/login")
+    @Operation(summary = "Salvar Cronograma", description = "esse endpoint Salva cronograma .")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description = "Usuário autenticado com sucesso."),
+        @ApiResponse(responseCode = "400", description = "Autenticação falhou. Nome de usuário ou senha inválidos."),
+        @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+       
+    })
+	public ResponseEntity<Object> saveCronograma(@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Objeto CronogramaDto a ser salvo", required = true, content = @Content(schema = @Schema(implementation = CronogramaDto.class)))@RequestBody @Valid CronogramaDto cronogramaDto) {				
 		var cronograma = new Cronograma();
 		BeanUtils.copyProperties(cronogramaDto, cronograma);
 		return ResponseEntity.status(HttpStatus.CREATED).body(facade.adicionarCronograma(cronograma));
 	}
 	
 	@GetMapping
+	 @Operation(summary = "Obter todos os cronogramas", description = "Esse endpoint Retorna todos os cronogramas cadastrados.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Lista de cronogramas retornada com sucesso."),
+        @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
 	public ResponseEntity<List<Cronograma>> getTodosCronogramas(){
 		return ResponseEntity.status(HttpStatus.OK).body(facade.listarCronograma());
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Object> updateCronograma(@PathVariable(value = "id") UUID id, @RequestBody @Valid CronogramaDto cronogramaDto){
+	@Operation(summary = "Atualizar Cronograma", description = "Esse endpoint Atualiza um cronograma existente.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Cronograma atualizado com sucesso."),
+        @ApiResponse(responseCode = "404", description = "Cronograma não encontrado."),
+        @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
+	public ResponseEntity<Object> updateCronograma(@PathVariable(value = "id") 
+    @Parameter(description = "ID do cronograma a ser atualizado", required = true)
+	UUID id,
+	@RequestBody @Valid  
+	@Parameter(description = "Objeto CronogramaDto contendo os dados a serem atualizados", required = true, schema = @Schema(implementation = CronogramaDto.class))  
+	CronogramaDto cronogramaDto){
+		
 		Optional<Cronograma> cronogramaOptional = facade.listarCronogramaPorId(id);
 		if (!cronogramaOptional.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cronograma não encontrado");
@@ -49,7 +83,13 @@ public class CronogramaController {
 	}	
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Object> deleteCronograma(@PathVariable(value = "id") UUID id){
+	 @Operation(summary = "Excluir Cronograma", description = "Esse endpoint Exclui um cronograma existente.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Cronograma excluído com sucesso."),
+        @ApiResponse(responseCode = "404", description = "Cronograma não encontrado."),
+        @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
+	public ResponseEntity<Object> deleteCronograma( @PathVariable(value = "id")  @Parameter(description = "ID do cronograma a ser excluído", required = true)  UUID id){
 		Optional<Cronograma> cronogramaOptional = facade.listarCronogramaPorId(id);
 		if (!cronogramaOptional.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cronograma não encontrado");

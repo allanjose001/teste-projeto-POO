@@ -38,5 +38,6 @@ public class Vaga implements Serializable {
 	public static long getSerialversionuid() {
 		return SerialVersionUID;
 	}
-}
+	
 
+}
