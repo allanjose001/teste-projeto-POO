@@ -32,8 +32,8 @@ public class UBS implements Serializable{
 	private String imagemUBS;
 	@Column(nullable = false, length = 200)
 	private String nomeUBS;
-	@Column(nullable = false)
-	private LocalDateTime registrationDate;
+	//@Column(nullable = false)
+	//private LocalDateTime registrationDate;
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Endereco endereco;
 	@OneToMany(mappedBy = "ubs", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -41,6 +41,19 @@ public class UBS implements Serializable{
     @OneToMany(mappedBy = "ubs", cascade = CascadeType.ALL)
     private List<Agendamento> agendamento;
 	
+    //construtores
+    public UBS(String imagemUBS, String nomeUBS, Endereco endereco) {
+    	this.imagemUBS = imagemUBS;
+    	this.nomeUBS = nomeUBS;
+    	this.endereco = endereco;
+    }
+    
+    public UBS() {
+    	
+    }
+    
+    
+    
 	//getters e setters
 	
 	public UUID getId() {
@@ -62,12 +75,6 @@ public class UBS implements Serializable{
 		this.nomeUBS = nomeUBS;
 	}
 
-	public LocalDateTime getRegistrationDate() {
-		return registrationDate;
-	}
-	public void setRegistrationDate(LocalDateTime registrationDate) {
-		this.registrationDate = registrationDate;
-	}
 	public Endereco getEndereco() {
 		return endereco;
 	}

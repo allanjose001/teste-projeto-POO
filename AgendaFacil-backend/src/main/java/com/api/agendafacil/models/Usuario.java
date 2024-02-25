@@ -63,9 +63,21 @@ public class Usuario implements Serializable{
 		this.addRole(TipoUsuario.USUARIO);
 	}
 	
+	public Usuario(String nome, LocalDate dataDeNascimento, String cpf, String sus, String telefone, String email,
+			String senha) {
+		this.nome = nome;
+		this.dataDeNascimento = dataDeNascimento;
+		this.cpf = cpf;
+		this.sus = sus;
+		this.telefone = telefone;
+		this.email = email;
+		this.senha = senha;
+		this.addRole(TipoUsuario.USUARIO);
+	}
+
+
 	public Usuario() {
 		this.addRole(TipoUsuario.USUARIO);
-		
 	}
 	
 	//getters e setters

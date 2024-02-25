@@ -3,6 +3,8 @@ package com.api.agendafacil.models;
 import java.io.Serializable;
 import java.util.UUID;
 
+import com.api.agendafacil.dtos.EnderecoDto;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,6 +30,24 @@ public class Endereco implements Serializable {
 	@Column(nullable = false)
 	private String estado;
 	
+	//construtores
+	public Endereco(String rua, String bairro, String cidade, String estado) {
+		this.rua = rua;
+		this.bairro = bairro;
+		this.cidade = cidade;
+		this.estado = estado;
+	}
+
+	public Endereco(EnderecoDto dto) {
+		this.rua = dto.getRua();
+		this.bairro = dto.getBairro();
+		this.cidade = dto.getCidade();
+		this.estado = dto.getEstado();
+	}
+	
+	public Endereco() {
+		
+	}
 	//getters e setters
 	
 	public UUID getId() {

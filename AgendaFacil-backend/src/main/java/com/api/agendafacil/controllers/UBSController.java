@@ -53,7 +53,7 @@ public class UBSController {
 	public ResponseEntity<Object> saveUBS(@RequestBody @Valid UBSDto ubsDto) {		
 		var ubs = new UBS();
 		BeanUtils.copyProperties(ubsDto, ubs);
-		ubs.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
+		//ubs.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
 		return ResponseEntity.status(HttpStatus.CREATED).body(facade.saveUBS(ubs));
 	}
 
@@ -113,7 +113,7 @@ public class UBSController {
 		var ubs = new UBS();
 		BeanUtils.copyProperties(ubsDto, ubs);
 		ubs.setId(ubsOptional.get().getId());
-		ubs.setRegistrationDate(ubsOptional.get().getRegistrationDate());
+		//ubs.setRegistrationDate(ubsOptional.get().getRegistrationDate());
 		return ResponseEntity.status(HttpStatus.OK).body(facade.saveUBS(ubs));
 	}	
 }
