@@ -1,10 +1,5 @@
 package com.api.agendafacil.enums;
 
-/**
- * Enum dos roles do usuario
- * 
- * @author Allan
- */
 public enum TipoUsuario {
 	ADMIN("ROLE_ADMIN"),
     USUARIO("ROLE_USUARIO");

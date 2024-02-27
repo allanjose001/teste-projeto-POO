@@ -13,13 +13,6 @@ import com.api.agendafacil.repositories.RepositorioUsuario;
 
 import jakarta.transaction.Transactional;
 
-/**
- * classe de servico de Usuario, contem as regras basicas de negocio
- * para que um Usuario possa ser criada
- * 
- * @author Alcielma
- * @author Allan
- */
 @Service
 public class UsuarioService implements UsuarioServiceInterface{
 	
@@ -33,15 +26,16 @@ public class UsuarioService implements UsuarioServiceInterface{
 			return repositorioUsuario.save(usuario);
 	    } catch (DataIntegrityViolationException ex) {
 	        // Captura exceção de violação de integridade (por exemplo, CPF duplicado)
-	       
+	        // Lança uma exceção personalizada informando sobre o erro de integridade
 	    	throw new IllegalArgumentException("Erro ao salvar o usuário. Verifique os dados fornecidos.", ex);
 	     }
 	}
-	
+	//esse metodo retorna uma lista com todos os ussuarios que estão contidos no meu banco de dados
 	public List<Usuario> getAllUsuario() {
 		return repositorioUsuario.findAll();
 	}
-	 
+	
+	//metodo de busca usuario por id 
 	public Optional<Usuario> findUsuarioById(UUID id) {
 		return repositorioUsuario.findById(id);
 	}
@@ -50,6 +44,7 @@ public class UsuarioService implements UsuarioServiceInterface{
 	 public void deleteUsuario(Usuario usuario) {
 		 // Verifica se o usuário existe antes de tentar excluí-lo
 		 if (repositorioUsuario.existsById(usuario.getId())) {
+	     // Exclui o usuário se existir
 			 repositorioUsuario.delete(usuario);
 	     } else {
 	     // Lança uma exceção se o usuário não existir para exclusão

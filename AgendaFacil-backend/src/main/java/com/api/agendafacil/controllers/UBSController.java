@@ -1,5 +1,10 @@
 package com.api.agendafacil.controllers;
 
+/*classe controladora do banco de dados
+ * aqui se encontra todos os comandos de manipulação do banco de dados
+*/
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -30,14 +35,6 @@ import jakarta.validation.Valid;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
-
-/**
- * classe controladora de UBS
- * 
- * @author Alcielma
- * @author Allan
- * @author Pedro
- */
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/agenda-facil")
@@ -45,7 +42,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 public class UBSController {
 
 	@Autowired
-	private Facade facade;
+	private Facade facade;;
 
 	@PostMapping
 		@Operation(summary = "Salvar UBS", description = "Esse endpoint Cria uma nova UBS (Unidade Básica de Saúde).")
@@ -57,6 +54,7 @@ public class UBSController {
 	public ResponseEntity<Object> saveUBS(@RequestBody @Valid UBSDto ubsDto) throws NomeUBSExistsException {		
 		var ubs = new UBS();
 		BeanUtils.copyProperties(ubsDto, ubs);
+		//ubs.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
 		return ResponseEntity.status(HttpStatus.CREATED).body(facade.saveUBS(ubs));
 	}
 
@@ -116,6 +114,7 @@ public class UBSController {
 		var ubs = new UBS();
 		BeanUtils.copyProperties(ubsDto, ubs);
 		ubs.setId(ubsOptional.get().getId());
+		//ubs.setRegistrationDate(ubsOptional.get().getRegistrationDate());
 		return ResponseEntity.status(HttpStatus.OK).body(facade.saveUBS(ubs));
 	}	
 }

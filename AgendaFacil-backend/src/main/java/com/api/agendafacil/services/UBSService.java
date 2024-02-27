@@ -1,5 +1,11 @@
 package com.api.agendafacil.services;
 
+/*classe de serviço
+ *A classe recebe uma instância de RepositorioUBS no construtor. servindo de injeção de dependência.
+ *Isso permite que a classe utilize o repositório sem criar diretamente a instância. 
+ *Isso facilita a substituição de implementações ou mocks para testes.
+ */
+
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -14,13 +20,6 @@ import com.api.agendafacil.repositories.RepositorioUBS;
 
 import jakarta.transaction.Transactional;
 
-/**
- * classe service de UBS, contem as regras basicas de negocio
- * para que uma UBS possa ser criada
- * 
- * @author Alcielma
- * @author Allan
- */
 @Service
 public class UBSService implements UBSServiceInterface{
 
@@ -32,7 +31,7 @@ public class UBSService implements UBSServiceInterface{
 	//com essa anotação configuramos a nossa aplicação apenas para o admin ter acesso ao metodo
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public UBS saveUBS(UBS ubs) throws NomeUBSExistsException{
-		//verifica se o nome já esta em uso, se estiver retorna o erro
+		
 		if(existsByNomeUBS(ubs.getNomeUBS())) {
 			throw new NomeUBSExistsException( "esse nome UBS já está em uso: "+ ubs.getNomeUBS());
 		}
@@ -49,11 +48,14 @@ public class UBSService implements UBSServiceInterface{
 
 	public Optional<UBS> findUBSById(UUID id) {
 		return repositorioUBS.findById(id);
+		//ideal adicionar or.ElseThrow()
 	}
 
 	@Transactional
+	//com essa anotação configuramos a nossa aplicação apenas para apenas o admin ter acesso ao metod
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public void deleteUBS(UBS ubs) {
 		repositorioUBS.delete(ubs);
+		//ideal adicionar or.ElseThrow()
 	}
 }

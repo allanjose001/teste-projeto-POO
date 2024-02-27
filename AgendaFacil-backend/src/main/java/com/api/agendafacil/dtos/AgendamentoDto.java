@@ -5,15 +5,23 @@ import com.api.agendafacil.models.UBS;
 import com.api.agendafacil.models.Usuario;
 import java.time.LocalDate;
 
+/**
+ * DTO (Data Transfer Object) para representar os detalhes de um agendamento.
+ * Este objeto é usado para transferir dados entre o controlador e o serviço.
+ * 
+ *  @author Alcielma
+ *  @author Allan
+ *  @author Pedro
+ */
 public class AgendamentoDto {
 	
-	private Usuario usuario;
-	private UBS ubs;
-	private LocalDate dataConsulta;
-	private TipoDeConsulta tipoConsulta;
-	private String nomeUBSTransient;
-	private String nomeUsuarioTransient;
-	private String dataConsultaTransient;
+	private Usuario usuario;// O usuário associado ao agendamento
+	private UBS ubs; // A Unidade Básica de Saúde (UBS) associada ao agendamento
+	private LocalDate dataConsulta; // A data da consulta agendada
+	private TipoDeConsulta tipoConsulta;// O tipo de consulta agendada
+	private String nomeUBSTransient;// Nome da UBS (atributo transitório, não persistido)
+	private String nomeUsuarioTransient; // Nome do usuário (atributo transitório, não persistido)
+	private String dataConsultaTransient; // Data da consulta formatada (atributo transitório, não persistido)
 	
 	//Getters e Setters
 	

@@ -16,14 +16,28 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Transient;
 
+/**
+ * Representa um modelo de agendamento no sistema.
+ * Um agendamento registra a marcação de uma consulta ou compromisso em uma unidade de saúde.
+ * Cada agendamento é associado a um usuário, uma unidade de saúde (UBS), uma data de consulta e um tipo de consulta.
+ * Esta classe serve como um modelo de dados para representar informações sobre agendamentos no sistema.
+ *
+ * @author Alcielma
+ * @author Allan
+ * @author Pedro
+ * 
+ */
+
 
 @Entity
 public class Agendamento implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID id;
+	
 	@ManyToOne
 	@JoinColumn (name="usuario_id", nullable=false)
 	@JsonIgnore
@@ -38,8 +52,8 @@ public class Agendamento implements Serializable {
 	private LocalDate dataConsulta;
 
 	private TipoDeConsulta tipoConsulta;
-	//transients
 	
+	//transients
 	@Transient
 	private String nomeUBSTransient;
 	@Transient
@@ -47,8 +61,10 @@ public class Agendamento implements Serializable {
 	@Transient
 	private String dataConsultaTransient;
 	
-	//getters Transient
-	
+	/**getters Transient
+	*Representação de tipo de String associada ao agendamento para fins de exibição na interface do usuário.
+	*
+	*/
 	public String getNomeUBSTransient() {
 		return ubs != null ? ubs.getNomeUBS() : null;
 	}
@@ -99,9 +115,5 @@ public class Agendamento implements Serializable {
 	public static long getSerialversiouid() {
 		return serialVersionUID;
 	}
-	
-
-	
-	
-	
+		
 }
