@@ -1,11 +1,5 @@
 package com.api.agendafacil.models;
 
-/*classe modelo para o banco de dados
- *é ela que define o formato do banco de dados
- *com ela é possivel adicionar ou remover colunas de informações a
- *serem escritas no banco de dados
-*/
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
@@ -20,11 +14,12 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 /**
- * Cria uma classe de UBS que recebe um endereco,
- *  e opcionalmente cronograma e agendamento
+ * classe modelo de UBS que é criado com imagem, nome e endereco.
+ * e futuramente pode receber um cronograma e varios agendamentos
+ * (imagem deve ser o caminho para uma foto, ex.: /resources/foto.jpg)
  * 
- * @author Allan
  * @author Alcielma
+ * @author Allan
  * @author Pedro
  */
 @Entity
@@ -46,10 +41,14 @@ public class UBS implements Serializable{
 	//semana aquela UBS atende
 	@OneToMany(mappedBy = "ubs", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Cronograma> cronograma;
+	
+	//guarda uma lista com os agendamentos feitos para aquela consulta
+	//serve para saber quantas consultas foram/serão feitas
     @OneToMany(mappedBy = "ubs", cascade = CascadeType.ALL)
     private List<Agendamento> agendamento;
 	
     //construtores
+    
     public UBS(String imagemUBS, String nomeUBS, Endereco endereco) {
     	this.imagemUBS = imagemUBS;
     	this.nomeUBS = nomeUBS;

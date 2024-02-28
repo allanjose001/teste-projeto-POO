@@ -4,21 +4,14 @@ import java.util.List;
 
 import com.api.agendafacil.enums.TipoDeConsulta;
 import com.api.agendafacil.models.UBS;
-/**
- * DTO (Data Transfer Object) que representa o cronograma de consultas.
- * 
- * @author Alcielma
- * @author Allan
- * @author Pedro
- */
+
 public class CronogramaDto {
 
-	private UBS ubs;// A unidade básica de saúde associada ao cronograma
-	private List<String> diasSemana;// Os dias da semana em que as consultas são agendadas
-	private List<TipoDeConsulta> tiposConsulta;// Os tipos de consulta disponíveis
-	private List<Integer> vagas; // A quantidade de vagas disponíveis para cada tipo de consulta
-	private String nomeUBSTransient; // Nome da UBS, não persistente
-
+	private UBS ubs;
+	private List<String> diasSemana;
+	private List<TipoDeConsulta> tiposConsulta;
+	private List<Integer> vagas;
+	private String nomeUBSTransient;
 	
 	//getters e setters
 	

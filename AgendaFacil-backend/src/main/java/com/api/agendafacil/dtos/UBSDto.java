@@ -1,12 +1,15 @@
 package com.api.agendafacil.dtos;
-/*classe de Data Transfer Object
- * classe criada para servir de ponte segura dos dados
- * de um lugar para o outro
- * (para mais informações pesquisar por classe DTO ao Gepeto)
- * */
 
 import com.api.agendafacil.models.Endereco;
 
+/**
+ * classe de transferencia de dados de UBS, é utilizada 
+ * para passar parametros de salvamento no controller da classe.
+ * Como cronograma e agendamento só são posteriormente adicionados por relação,
+ * não é necessario declarar as listas de agendamento e cronograma
+ * 
+ * @author Allan
+ */
 public class UBSDto {
 	
 	private String imagemUBS;

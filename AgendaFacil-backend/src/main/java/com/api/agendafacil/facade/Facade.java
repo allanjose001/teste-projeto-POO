@@ -24,6 +24,16 @@ import com.api.agendafacil.services.UsuarioService;
 
 import jakarta.transaction.Transactional;
 
+/**
+ * classe fachada do sistema, serve para fazer uma ligação entre classes de negocios
+ * isso ajuda para que todas as classes service estejam ligadas á apenas uma classe
+ * e então basta chama-los nos controllers pela fachada ao invés de chamar pelo Service
+ * o que facilita a manutenção do codigo
+ * 
+ * @author Alcielma
+ * @author Allan
+ * @author Pedro
+ */
 @Service
 public class Facade {
 
@@ -33,6 +43,8 @@ public class Facade {
 	private UBSService ubsService;
 	
 	public UBS saveUBS(UBS ubs) {
+		//tenta salvar ubs, se receber alguma exceção captura ela e a retorna
+		//para ser chamada no controller
 		try {
 			return ubsService.saveUBS(ubs);	
 		} catch (Exception e) {
@@ -51,8 +63,7 @@ public class Facade {
 	public void deleteUBS(UBS ubs) {
 		ubsService.deleteUBS(ubs);
 	}
-	
-	//metodos como existsByNome não são necessarios aqui
+
 	//Endereco----------------------------------------------------------
 	private EnderecoService enderecoService;
 	
@@ -78,28 +89,27 @@ public class Facade {
 	private AgendamentoService agendamentoService;
 	
 	public Agendamento saveAgendamento(Agendamento agendamento) {
+		//instancia os tipos necessarios para fazer as operações
 		TipoDeConsulta tipoConsulta = agendamento.getTipoConsulta();
 		LocalDate dataDesejada = agendamento.getDataConsulta();
-		//instancia os tipos necessarios para fazer as operações
-		UBS ubs = agendamento.getUbs();
 		//acessa a UBS pelo Id que está dentro de Agendamento
-		System.out.println("vagas disponiveis: "+ tipoConsulta.getVagasDisponiveis());
-		
-		List<Cronograma> cronogramas = cronogramaService.listarCronogramaPorUBS(ubs);
+		UBS ubs = agendamento.getUbs();
+
 		//lista somente a UBS desejada
+		List<Cronograma> cronogramas = cronogramaService.listarCronogramaPorUBS(ubs);
+		//verifica no cronograma se o tipo de consulta escolhido é atendido naquele dia da semana
 		boolean tipoEDataDisponivel = cronogramas.stream()
 				.anyMatch(cronograma -> cronograma.getDiasSemana().contains(dataDesejada.getDayOfWeek().toString())
 						&& cronograma.getTiposConsulta().contains(tipoConsulta));
-				//verifica se o tipo de consulta é atendido naquele dia da semana
 		
+		//se o tipo de consulta não está no cronograma retorna uma exception
 		if (tipoEDataDisponivel) {
+			//verifica se ainda tem vaga disponivel para aquele dia, se não retorna uma exception
 			if (tipoConsulta != null && tipoConsulta.getVagasDisponiveis() > 0) {
 				tipoConsulta.setVagasDisponiveis(tipoConsulta.getVagasDisponiveis() - 1);
-				//verifica se tem vagas disponiveis e tira 1 vaga
 			
 				Agendamento novoAgendamento = agendamentoService.saveAgendamento(agendamento);
 	
-				System.out.println("vagas disponiveis, depois de salvar: "+ tipoConsulta.getVagasDisponiveis());
 				return novoAgendamento;
 			} else {
 				throw new RuntimeException("neste dia não há mais vagas disponiveis para esta consulta");
@@ -133,11 +143,10 @@ public class Facade {
 	
 	public Cronograma adicionarCronograma(Cronograma cronograma) {
 		try {
-		return cronogramaService.adicionarCronograma(cronograma);
-		}catch(IllegalArgumentException e) {
-			 System.out.println("Erro ao adicionar cronograma: " + e.getMessage());
+			return cronogramaService.adicionarCronograma(cronograma);
+		}catch(Exception e) {
+			throw new RuntimeException("Erro ao adicionar cronograma ", e);
 		}
-		return null;
 	}
 	
 	public Optional<Cronograma> listarCronogramaPorId(UUID id) {
