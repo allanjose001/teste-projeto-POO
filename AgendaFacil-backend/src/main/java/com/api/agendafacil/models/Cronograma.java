@@ -22,6 +22,16 @@ import jakarta.persistence.Transient;
 import com.api.agendafacil.enums.TipoDeConsulta;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * Esta classe representa um cronograma de consultas referente a Unidade Básica de Saúde (UBS).
+ * Um cronograma contém informações sobre os dias da semana em que as consultas estão disponíveis,
+ * os tipos de consulta oferecidos, a quantidade de vagas disponíveis para cada tipo.
+ * 
+ * @author Alcielma
+ * @author Allan
+ * @author Pedro
+ * 
+ */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Cronograma implements Serializable{
@@ -35,7 +45,8 @@ public class Cronograma implements Serializable{
 	@JoinColumn (name="ubs_id", nullable=false)
 	@JsonIgnore
 	private UBS ubs;
-	
+	//os 3 list abaixo geram listas para guardar os perspectivos
+	//dias da semana, tipos de consulta e vagas disponiveis para cada
 	@ElementCollection
 	@CollectionTable(name = "cronograma_dias_semana", joinColumns = @JoinColumn(name = "cronograma_id"))
 	@Column(name = "dia_semana")
@@ -57,6 +68,16 @@ public class Cronograma implements Serializable{
 	@Transient
 	private String nomeUBSTransient;
 	
+	/**
+	 * Construtor da classe Cronograma.
+	 * @param id O ID do cronograma
+	 * @param ubs A UBS associada ao cronograma
+	 * @param diasSemana A lista de dias da semana do cronograma
+	 * @param tiposConsulta A lista de tipos de consulta do cronograma
+	 * @param vagas A lista de vagas disponíveis para cada tipo de consulta
+	 * @param nomeUBSTransient O nome da UBS associada ao cronograma (transiente)
+	 * 
+	 */
 	public Cronograma(UUID id, UBS ubs, List<String> diasSemana, List<TipoDeConsulta> tiposConsulta,
 			List<Integer> vagas, String nomeUBSTransient) {
 		this.id = id;

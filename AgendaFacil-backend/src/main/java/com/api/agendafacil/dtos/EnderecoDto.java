@@ -1,11 +1,18 @@
 package com.api.agendafacil.dtos;
-
+/**
+ * DTO (Data Transfer Object) para representar os detalhes de um endereço.
+ * Este objeto é usado para transferir dados entre o controlador e o serviço.
+ * 
+ *  @author Alcielma
+ *  @author Allan
+ *  @author Pedro
+ */
 public class EnderecoDto {
 
-	private String rua;
-	private String bairro;
-	private String cidade;
-	private String estado;
+	private String rua; //Representa o nome da rua onde está localizado o endereço.
+	private String bairro; //Representa o nome do bairro onde está localizado o endereço.
+	private String cidade;// Representa o nome da cidade onde está localizado o endereço.
+	private String estado;// Representa o nome do estado onde está localizado o endereço.
 	
 	//getters e setters
 	

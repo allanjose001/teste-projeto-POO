@@ -19,6 +19,7 @@ import jakarta.transaction.Transactional;
  * 
  * @author Alcielma
  * @author Allan
+ * @author Pedro
  */
 @Service
 public class UsuarioService implements UsuarioServiceInterface{

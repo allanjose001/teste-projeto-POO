@@ -1,16 +1,30 @@
 package com.api.agendafacil.enums;
+/**
+ * Enumeração que representa os tipos de consulta disponíveis no sistema.
+ * Cada tipo de consulta tem uma quantidade de vagas disponíveis.
+ * 
+ * @author Alcielma
+ */
 
 public enum TipoDeConsulta {
-	MEDICO(1),
-	ENFERMEIRO(1),
-	DENTISTA(1),
-	PEDIATRA(1);
+	
+	MEDICO(1), // Tipo de consulta comum para médicos.
+	ENFERMEIRO(1), // Tipo de consulta comum para enfermeiro.
+	DENTISTA(1), // Tipo de consulta comum para dentista.
+	PEDIATRA(1); // Tipo de consulta comum para pediatra.
 
-	// Criação de um construtor para me dar acesso a quantidade de vagas que tenho disponiveis
-	private int vagasDisponiveis;
+	private int vagasDisponiveis; // Quantidade de vagas disponíveis para este tipo de consulta
+	
+	 /**
+     * Construtor que associa uma quantidade inicial de vagas disponíveis a cada tipo de consulta.
+     * @param vagasDisponiveis a quantidade inicial de vagas disponíveis.
+     * 
+     */
 	TipoDeConsulta(int vagasDisponiveis) {
 		this.vagasDisponiveis = vagasDisponiveis;
 	}
+	
+	//Getters e Setters
 	public int getVagasDisponiveis() {
 		return vagasDisponiveis;
 	}

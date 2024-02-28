@@ -34,6 +34,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
  * 
  * @author Alcielma
  * @author Allan
+ * @author Pedro
  */
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
