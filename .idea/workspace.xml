@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="250466e8-4ba9-4999-86c3-e8a338ee781e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/src/main/java/com/api/agendafacil/controllers/AuthUsuarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/src/main/java/com/api/agendafacil/controllers/AuthUsuarioController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/src/main/java/com/api/agendafacil/enums/TipoDeConsulta.java" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/src/main/java/com/api/agendafacil/enums/TipoDeConsulta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/src/main/java/com/api/agendafacil/facade/Facade.java" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/src/main/java/com/api/agendafacil/facade/Facade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/src/main/java/com/api/agendafacil/models/UBS.java" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/src/main/java/com/api/agendafacil/models/UBS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/META-INF/maven/com.api/teste-agenda/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/META-INF/maven/com.api/teste-agenda/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/AgendaFacilApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/AgendaFacilApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/Exceptions/ConsultaNaoTemVagaException.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/Exceptions/ConsultaNaoTemVagaException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/Exceptions/DataNaoDisponivelException.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/Exceptions/DataNaoDisponivelException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/Exceptions/NomeUBSExistsException.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/Exceptions/NomeUBSExistsException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/configs/DateConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/configs/DateConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/configs/SwaggerConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/configs/SwaggerConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/controllers/AgendamentoController.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/controllers/AgendamentoController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/controllers/AuthUsuarioController.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/controllers/AuthUsuarioController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/controllers/CronogramaController.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/controllers/CronogramaController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/controllers/EnderecoController.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/controllers/EnderecoController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/controllers/UBSController.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/controllers/UBSController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/controllers/UsuarioController.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/controllers/UsuarioController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/dtos/AgendamentoDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/dtos/AgendamentoDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/dtos/CronogramaDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/dtos/CronogramaDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/dtos/EnderecoDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/dtos/EnderecoDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/dtos/UBSDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/dtos/UBSDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/dtos/UsuarioDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/dtos/UsuarioDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/enums/TipoDeConsulta.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/enums/TipoDeConsulta.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/enums/TipoUsuario.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/enums/TipoUsuario.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/facade/Facade.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/facade/Facade.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/models/Agendamento.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/models/Agendamento.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/models/AuthRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/models/AuthRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/models/Cronograma.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/models/Cronograma.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/models/Endereco.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/models/Endereco.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/models/TipoConsulta.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/models/TipoConsulta.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/models/UBS.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/models/UBS.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/models/Usuario.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/models/Usuario.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/models/Vaga.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/models/Vaga.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/repositories/RepositorioAgendamento.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/repositories/RepositorioAgendamento.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/repositories/RepositorioCronograma.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/repositories/RepositorioCronograma.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/repositories/RepositorioEndereco.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/repositories/RepositorioEndereco.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/repositories/RepositorioUBS.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/repositories/RepositorioUBS.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/repositories/RepositorioUsuario.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/repositories/RepositorioUsuario.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/services/AgendamentoService.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/services/AgendamentoService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/services/AgendamentoServiceInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/services/AgendamentoServiceInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/services/AuthUsuarioService.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/services/AuthUsuarioService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/services/CronogramaService.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/services/CronogramaService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/services/CronogramaServiceInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/services/CronogramaServiceInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/services/EnderecoService.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/services/EnderecoService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/services/EnderecoServiceInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/services/EnderecoServiceInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/services/UBSService.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/services/UBSService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/services/UBSServiceInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/services/UBSServiceInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/services/UsuarioService.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/services/UsuarioService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/services/UsuarioServiceInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/classes/com/api/agendafacil/services/UsuarioServiceInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/test-classes/com/api/agendafacil/models/EnderecoTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/test-classes/com/api/agendafacil/models/EnderecoTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/test-classes/com/api/agendafacil/models/UBSTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/test-classes/com/api/agendafacil/models/UBSTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/test-classes/com/api/agendafacil/models/UsuarioTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/test-classes/com/api/agendafacil/models/UsuarioTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgendaFacil-backend/target/test-classes/com/api/testeagenda/TesteAgendaApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/AgendaFacil-backend/target/test-classes/com/api/testeagenda/TesteAgendaApplicationTests.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2cyffFJXaeag1BQeVHHAZsiNIcK" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JUnit.TesteAgendaApplicationTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UsuarioTest.executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.AgendaFacilApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;final&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager" selected="Spring Boot.AgendaFacilApplication">
+    <configuration name="TesteAgendaApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="teste-agenda" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.api.testeagenda.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.api.testeagenda" />
+      <option name="MAIN_CLASS_NAME" value="com.api.testeagenda.TesteAgendaApplicationTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UsuarioTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="teste-agenda" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.api.agendafacil.models.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.api.agendafacil.models" />
+      <option name="MAIN_CLASS_NAME" value="com.api.agendafacil.models.UsuarioTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AgendaFacilApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="teste-agenda" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.api.agendafacil.AgendaFacilApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.api.agendafacil.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.AgendaFacilApplication" />
+        <item itemvalue="JUnit.TesteAgendaApplicationTests" />
+        <item itemvalue="JUnit.UsuarioTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-5cd809f4" />
+        <option value="jdk-21.0.1-openjdk-21.0.1-4caba194b151-23eed401" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="250466e8-4ba9-4999-86c3-e8a338ee781e" name="Changes" comment="" />
+      <created>1709088839801</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1709088839801</updated>
+      <workItem from="1709088842047" duration="9155000" />
+      <workItem from="1709132599737" duration="3661000" />
+      <workItem from="1709145930966" duration="9209000" />
+      <workItem from="1709217200244" duration="4410000" />
+      <workItem from="1709222587313" duration="3208000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
