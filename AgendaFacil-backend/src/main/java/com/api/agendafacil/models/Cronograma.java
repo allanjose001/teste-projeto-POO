@@ -45,8 +45,7 @@ public class Cronograma implements Serializable{
 	@JoinColumn (name="ubs_id", nullable=false)
 	@JsonIgnore
 	private UBS ubs;
-	//os 3 list abaixo geram listas para guardar os perspectivos
-	//dias da semana, tipos de consulta e vagas disponiveis para cada
+	
 	@ElementCollection
 	@CollectionTable(name = "cronograma_dias_semana", joinColumns = @JoinColumn(name = "cronograma_id"))
 	@Column(name = "dia_semana")

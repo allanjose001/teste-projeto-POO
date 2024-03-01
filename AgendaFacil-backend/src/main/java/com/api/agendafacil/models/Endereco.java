@@ -14,7 +14,7 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 
 /**
- * Classe que representa um endereço que será associado a UBS.
+ * Classe que representa um endereço que será associado ao isuário.
  * Um endereço é composto por vários elementos, como rua, bairro, cidade e estado.
  * Esta classe encapsula esses elementos para fornecer uma representação coesa de um endereço.
  * Pode ser utilizado em diferentes contextos, como cadastros de usuários, empresas, entre outros.

@@ -7,15 +7,6 @@ import com.api.agendafacil.enums.TipoUsuario;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-/**
- * classe de transferencia de dados de Usuario, é utilizada 
- * para passar parametros de salvamento no controller da classe.
- * Como agendamento só é adicionado posteriormente por relação,
- * não é necessario declarar a lista de agendamento
- * 
- * @author Alcielma
- * @author Allan
- */
 public class UsuarioDto {
 	
 	@NotBlank

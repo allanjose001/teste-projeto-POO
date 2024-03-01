@@ -29,13 +29,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
-/**
- * classe controladora de Usuario
- * 
- * @author Alcielma
- * @author Allan
- * @author Pedro
- */
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/usuario")

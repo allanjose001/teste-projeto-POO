@@ -22,14 +22,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
-/**
- * classe modelo de Usuario que é criado com nome, data de nascimento
- * cpf, sus, telefonem email e senha.
- * e futuramente pode receber varios agendamentos
- * 
- * @author Alcielma
- * @author Allan
- */
 @Entity
 public class Usuario implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -44,28 +36,21 @@ public class Usuario implements Serializable{
 	private LocalDate dataDeNascimento;
 	@Column(nullable = false, unique = true, length = 200)
 	private String cpf;
-	@Column(nullable = false,length=200)
+	@Column(nullable=false,length=200)
 	private String sus;
 	@Column(nullable = false, unique = true, length = 200)
 	private String telefone;
 	@Column(nullable = false, length = 200)
 	private String email;
 	private String senha;
-	//guarda uma lista com os agendamentos feitos por este usuario
-	//serve para visualizar as consultas já feitas ou que estão para acontecer
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
 	private List<Agendamento> agendamento;
 	
-	//recebe um Enum que pode ser Usuario ou Admin, esse enum será inserido numa 
-	//collection chamada "usuario_roles", e então o transforma em uma string
-	//por fim adiciona ela a coluna de "role"
 	@ElementCollection(targetClass = TipoUsuario.class, fetch = FetchType.EAGER)
 	@CollectionTable(name = "usuario_roles")
 	@Enumerated(EnumType.STRING)
 	@Column(name = "role")
 	private Set<TipoUsuario> roles;
-	
-	//construtores
 
 	public Usuario(UUID id, String nome, LocalDate dataDeNascimento, String cpf, String telefone, String email, String senha) {
 		this.id = id;

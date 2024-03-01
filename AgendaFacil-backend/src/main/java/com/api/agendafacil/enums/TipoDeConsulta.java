@@ -3,7 +3,7 @@ package com.api.agendafacil.enums;
  * Enumeração que representa os tipos de consulta disponíveis no sistema.
  * Cada tipo de consulta tem uma quantidade de vagas disponíveis.
  * 
- * @author Alcielma
+ * @author Alcilema
  */
 
 public enum TipoDeConsulta {
